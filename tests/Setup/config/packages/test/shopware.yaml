@@ -1,0 +1,9 @@
+shopware:
+  filesystem:
+    private:
+      type: local
+      root: '%kernel.project_dir%/var/files-test'
+
+    public:
+        type: local
+        root: '%kernel.project_dir%/public/files-test'

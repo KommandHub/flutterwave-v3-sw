@@ -1,0 +1,15 @@
+parameters:
+    paths:
+        - 'src/'
+
+    # Set the level to 9 (the highest level)
+    level: 9
+
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics
+
+    parallel:
+        jobSize: 20
+        maximumNumberOfProcesses: 32
+        minimumNumberOfJobsPerProcess: 2

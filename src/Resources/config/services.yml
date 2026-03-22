@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Kommandhub\FlutterwaveV3SW\:
+    resource: '../../*'
+    exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+  Kommandhub\FlutterwaveV3SW\Checkout\Payment\:
+    resource: '../../Checkout/Payment/*'
+    public: true
+    tags:
+      - { name: 'shopware.payment_handler' }

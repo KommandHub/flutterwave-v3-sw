@@ -1,0 +1,47 @@
+# Composer dependencies
+/vendor/
+/composer.lock
+
+# Python
+__pycache__/
+/*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+env/
+venv/
+
+# Node.js
+/node_modules/
+/npm-debug.log
+/yarn-error.log
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+/build/
+/out/
+
+# SQL dumps
+*.sql
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+*.iml
+
+# Ant build
+/build.xml
+/dist/
+
+# Misc
+*.log
+*.tmp
+*.cache
