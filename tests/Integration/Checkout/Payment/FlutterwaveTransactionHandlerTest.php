@@ -117,11 +117,31 @@ class FlutterwaveTransactionHandlerTest extends TestCase
             ->willReturn([
                 'status' => 'success',
                 'data' => [
+                    'id' => 12345,
                     'status' => 'successful',
                     'amount' => 100.0,
-                    'currency' => 'NGN'
+                    'currency' => 'NGN',
+                    'tx_ref' => 'tx-ref-123',
+                    'payment_type' => 'card',
+                    'app_fee' => 1.5,
+                    'amount_settled' => 98.5,
                 ]
             ]);
+
+        $this->orderTransactionService->expects($this->once())
+            ->method('update')
+            ->with($this->callback(function ($payload) use ($transactionId) {
+                return $payload[0]['id'] === $transactionId && 
+                       isset($payload[0]['customFields']) && 
+                       $payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_TRANSACTION_ID] === '12345' &&
+                       $payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_REFERENCE] === 'tx-ref-123' &&
+                       $payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_PAYMENT_TYPE] === 'card' &&
+                       $payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_TRANSACTION_FEE] === 1.5 &&
+                       $payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_AMOUNT_CHARGED] === 100.0 &&
+                       $payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_AMOUNT_SETTLED] === 98.5 &&
+                       $payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_CURRENCY] === 'NGN' &&
+                       isset($payload[0]['customFields'][FlutterwaveTransactionHandler::FIELD_VERIFIED_AT]);
+            }), $context);
 
         $this->transactionStateHandler->expects($this->once())
             ->method('paid')
@@ -305,6 +325,7 @@ class FlutterwaveTransactionHandlerTest extends TestCase
             ]
         ]);
 
+        $this->orderTransactionService->expects($this->once())->method('update');
         $this->transactionStateHandler->expects($this->once())->method('reopen');
 
         $this->handler->finalize($request, $paymentTransactionStruct, $context);
@@ -353,9 +374,14 @@ class FlutterwaveTransactionHandlerTest extends TestCase
         $this->orderTransactionService->method('getOrderTransaction')->willReturn($orderTransaction);
         $this->transactionService->method('verify')->willReturn([
             'status' => 'success',
-            'data' => ['status' => 'successful', 'amount' => 100.0, 'currency' => null]
+            'data' => [
+                'status' => 'successful',
+                'amount' => 100.0,
+                'currency' => null
+            ]
         ]);
 
+        $this->orderTransactionService->expects($this->once())->method('update');
         $this->config->method('isDebugEnabled')->willReturn(true);
         $this->logger->expects($this->atLeastOnce())->method('info');
 

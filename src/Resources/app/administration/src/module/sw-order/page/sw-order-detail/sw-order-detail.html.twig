@@ -1,0 +1,13 @@
+{% block sw_order_detail_content_tabs_extension %}
+    {% block sw_order_detail_content_tabs_flutterwave %}
+        <sw-tabs-item
+                class="sw-order-detail__tabs-tab-flutterwave"
+                :route="{ name: 'kommandhub.flutterwave.detail', params: { id: $route.params.id } }"
+                :title="$t('sw-order.detail.tabFlutterwave')"
+        >
+            {{ $t('sw-order.detail.tabFlutterwave') }}
+        </sw-tabs-item>
+    {% endblock %}
+
+    {% parent %}
+{% endblock %}

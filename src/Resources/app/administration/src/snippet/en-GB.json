@@ -1,0 +1,24 @@
+{
+  "kommandhub-flutterwave-detail": {
+    "title": "Flutterwave",
+    "summary": {
+      "chargedAmount": "Charged Amount",
+      "paymentChannel": "Payment Channel"
+    },
+    "grid": {
+      "reference": "Flutterwave Reference",
+      "transactionId": "Flutterwave Transaction ID",
+      "processingFee": "Processing Fee",
+      "verifiedAt": "Verified At"
+    },
+    "emptyState": {
+      "title": "No Flutterwave Transaction Found",
+      "subline": "This order was not processed via Flutterwave or the transaction details are unavailable."
+    }
+  },
+  "sw-order": {
+    "detail": {
+      "tabFlutterwave": "Flutterwave"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "kommandhub-flutterwave-detail": {
+    "title": "Flutterwave",
+    "summary": {
+      "chargedAmount": "Montant débité",
+      "paymentChannel": "Canal de paiement"
+    },
+    "grid": {
+      "reference": "Référence Flutterwave",
+      "transactionId": "ID de transaction Flutterwave",
+      "processingFee": "Frais de traitement",
+      "verifiedAt": "Vérifié à"
+    },
+    "emptyState": {
+      "title": "Aucune transaction Flutterwave trouvée",
+      "subline": "Cette commande n'a pas été traitée via Flutterwave ou les détails de la transaction ne sont pas disponibles."
+    }
+  },
+  "sw-order": {
+    "detail": {
+      "tabFlutterwave": "Flutterwave"
+    }
+  }
+}

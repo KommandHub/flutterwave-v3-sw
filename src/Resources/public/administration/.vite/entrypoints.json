@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/kommandhubflutterwavev3sw/administration/",
+  "entryPoints": {
+    "kommandhub-flutterwave-v3-s-w": {
+      "css": [
+        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-CQM8eMS4.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-VLU_DqTR.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

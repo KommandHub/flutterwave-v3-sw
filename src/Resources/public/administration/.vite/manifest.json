@@ -1,0 +1,18 @@
+{
+  "main.js": {
+    "file": "assets/kommandhub-flutterwave-v3-s-w-VLU_DqTR.js",
+    "name": "kommandhub-flutterwave-v3-s-w",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "assets/kommandhub-flutterwave-v3-s-w-CQM8eMS4.css"
+    ],
+    "assets": [
+      "assets/icon-C6E2mV1P.png"
+    ]
+  },
+  "view/kommandhub-flutterwave-detail/icon.png": {
+    "file": "assets/icon-C6E2mV1P.png",
+    "src": "view/kommandhub-flutterwave-detail/icon.png"
+  }
+}
