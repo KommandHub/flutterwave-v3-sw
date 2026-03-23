@@ -34,7 +34,7 @@ class TransactionCartValidatorTest extends TestCase
         $context = $this->createMock(SalesChannelContext::class);
         $paymentMethod = new PaymentMethodEntity();
         $paymentMethod->setHandlerIdentifier('SomeOtherHandler');
-        
+
         $context->method('getPaymentMethod')->willReturn($paymentMethod);
 
         $this->validator->validate($cart, $errors, $context);
@@ -52,11 +52,11 @@ class TransactionCartValidatorTest extends TestCase
         $paymentMethod = $this->createMock(PaymentMethodEntity::class);
         $paymentMethod->method('getHandlerIdentifier')->willReturn(FlutterwaveTransactionHandler::class);
         $paymentMethod->method('getTranslation')->with('name')->willReturn('Flutterwave');
-        
+
         $context->method('getPaymentMethod')->willReturn($paymentMethod);
 
         $this->validator->validate($cart, $errors, $context);
-        
+
         $this->assertCount(1, $errors);
         $this->assertInstanceOf(PaymentMethodBlockedError::class, $errors->first());
     }
@@ -71,11 +71,11 @@ class TransactionCartValidatorTest extends TestCase
         $context = $this->createMock(SalesChannelContext::class);
         $paymentMethod = new PaymentMethodEntity();
         $paymentMethod->setHandlerIdentifier(FlutterwaveTransactionHandler::class);
-        
+
         $context->method('getPaymentMethod')->willReturn($paymentMethod);
 
         $this->validator->validate($cart, $errors, $context);
-        
+
         $this->assertCount(0, $errors);
     }
 
@@ -83,7 +83,7 @@ class TransactionCartValidatorTest extends TestCase
     {
         $cart = new Cart('test');
         $cart->setLineItems(new LineItemCollection());
-        
+
         $this->assertFalse($this->validator->isZeroValueCart($cart));
     }
 
@@ -92,7 +92,7 @@ class TransactionCartValidatorTest extends TestCase
         $cart = new Cart('test');
         $cart->setLineItems(new LineItemCollection([new LineItem('id', 'type')]));
         $cart->setPrice(new CartPrice(10, 10, 10, new CalculatedTaxCollection(), new TaxRuleCollection(), CartPrice::TAX_STATE_GROSS));
-        
+
         $this->assertFalse($this->validator->isZeroValueCart($cart));
     }
 
@@ -101,7 +101,7 @@ class TransactionCartValidatorTest extends TestCase
         $cart = new Cart('test');
         $cart->setLineItems(new LineItemCollection([new LineItem('id', 'type')]));
         $cart->setPrice(new CartPrice(0, 0, 0, new CalculatedTaxCollection(), new TaxRuleCollection(), CartPrice::TAX_STATE_GROSS));
-        
+
         $this->assertTrue($this->validator->isZeroValueCart($cart));
     }
 }

@@ -32,7 +32,7 @@ class FlutterwaveTransactionHandler extends AbstractPaymentHandler
     public const FIELD_AMOUNT_SETTLED = 'flutterwave_amount_settled';
     public const FIELD_CURRENCY = 'flutterwave_currency';
     public const FIELD_VERIFIED_AT = 'flutterwave_verified_at';
-    public const FIELD_CUSTOMER =  'flutterwave_customer';
+    public const FIELD_CUSTOMER = 'flutterwave_customer';
 
     /**
      * @param OrderTransactionService $orderTransactionService Service to handle order transaction operations.
@@ -208,8 +208,11 @@ class FlutterwaveTransactionHandler extends AbstractPaymentHandler
         $expectedAmount = $orderTransaction->getAmount()->getTotalPrice();
         $expectedCurrency = $orderTransaction->getOrder()?->getCurrency()?->getIsoCode();
 
-        $actualAmount = (float) ($data['amount'] ?? 0);
-        $actualCurrency = $data['currency'] ?? null;
+        $actualAmount = 0.0;
+        if (isset($data['amount']) && is_numeric($data['amount'])) {
+            $actualAmount = (float)$data['amount'];
+        }
+        $actualCurrency = isset($data['currency']) && is_string($data['currency']) ? $data['currency'] : null;
 
         if (abs($actualAmount - $expectedAmount) > 0.01 || $actualCurrency !== $expectedCurrency) {
             $this->logError('Flutterwave amount or currency mismatch', [
@@ -236,7 +239,7 @@ class FlutterwaveTransactionHandler extends AbstractPaymentHandler
         $customFields = $orderTransaction->getCustomFields() ?? [];
         $customFields = array_merge($customFields, [
             self::FIELD_REFERENCE => $data['tx_ref'] ?? null,
-            self::FIELD_TRANSACTION_ID => (string) ($data['id'] ?? $transactionId),
+            self::FIELD_TRANSACTION_ID => (isset($data['id']) && (is_string($data['id']) || is_numeric($data['id']))) ? (string)$data['id'] : $transactionId,
             self::FIELD_PAYMENT_TYPE => $data['payment_type'] ?? null,
             self::FIELD_TRANSACTION_FEE => $data['app_fee'] ?? null,
             self::FIELD_AMOUNT_CHARGED => $data['amount'] ?? ($data['charged_amount'] ?? null),
@@ -250,7 +253,7 @@ class FlutterwaveTransactionHandler extends AbstractPaymentHandler
             [
                 'id' => $orderTransaction->getId(),
                 'customFields' => $customFields,
-            ]
+            ],
         ], $context);
     }
 

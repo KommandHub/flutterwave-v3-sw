@@ -25,6 +25,7 @@ class TransactionService
      *
      * @param PaymentPayload $payload The payment payload constructed by the PayloadBuilder.
      * @param string $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return array The initialization response from Flutterwave.
      *
      * @throws FlutterwaveException If the Flutterwave SDK encounters an error.
@@ -41,6 +42,7 @@ class TransactionService
      *
      * @param string $transactionId The unique transaction ID returned by Flutterwave.
      * @param string $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return array The verification response from Flutterwave.
      *
      * @throws FlutterwaveException If the Flutterwave SDK encounters an error.
@@ -56,6 +58,7 @@ class TransactionService
      * Configures and returns a Flutterwave client instance.
      *
      * @param string $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return Flutterwave The configured Flutterwave client.
      *
      * @throws \RuntimeException If the API secret key is missing.

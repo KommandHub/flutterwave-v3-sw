@@ -8,7 +8,6 @@ use Kommandhub\FlutterwaveV3SW\Service\Config;
 use Kommandhub\FlutterwaveV3SW\Service\PayloadBuilder;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Price\Struct\CalculatedPrice;
-use Shopware\Core\Checkout\Cart\Price\Struct\CartPrice;
 use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTaxCollection;
 use Shopware\Core\Checkout\Cart\Tax\Struct\TaxRuleCollection;
 use Shopware\Core\Checkout\Order\Aggregate\OrderCustomer\OrderCustomerEntity;
@@ -38,7 +37,7 @@ class PayloadBuilderTest extends TestCase
 
         $order = new OrderEntity();
         $order->setSalesChannelId('sales-channel-id');
-        
+
         $currency = new CurrencyEntity();
         $currency->setIsoCode('NGN');
         $order->setCurrency($currency);

@@ -26,6 +26,7 @@ class PayloadBuilder
      *
      * @param OrderTransactionEntity $orderTransaction The Shopware order transaction entity.
      * @param PaymentTransactionStruct $transaction The payment transaction struct.
+     *
      * @return PaymentPayload The constructed Flutterwave payment payload.
      *
      * @throws \RuntimeException If required order, customer, or currency information is missing.
@@ -56,6 +57,10 @@ class PayloadBuilder
         // 4. Retrieve the return URL and sales channel ID.
         $returnUrl = $transaction->getReturnUrl();
         $salesChannelId = $order->getSalesChannelId();
+
+        if (!is_string($returnUrl)) {
+            throw new \RuntimeException('Return URL is missing for the payment transaction.');
+        }
 
         // 5. Create the customer payload.
         $customerPayload = new CustomerPayload(

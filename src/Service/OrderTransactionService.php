@@ -35,6 +35,7 @@ class OrderTransactionService
      *
      * @param string $transactionId The transaction ID.
      * @param Context $context The Shopware context.
+     *
      * @return OrderTransactionEntity The order transaction.
      *
      * @throws \InvalidArgumentException If the transaction is not found.
@@ -58,6 +59,7 @@ class OrderTransactionService
      * Builds the criteria with necessary associations.
      *
      * @param array $ids Optional transaction IDs.
+     *
      * @return Criteria The search criteria.
      */
     private function getCriteria(array $ids = []): Criteria

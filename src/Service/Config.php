@@ -23,6 +23,7 @@ class Config
      * Switch between sandbox and live keys based on the environment setting.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return string|null The API Public Key.
      */
     public function getApiPublicKey(?string $salesChannelId = null): ?string
@@ -39,6 +40,7 @@ class Config
      * Switch between sandbox and live keys based on the environment setting.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return string|null The API Secret Key.
      */
     public function getApiSecretKey(?string $salesChannelId = null): ?string
@@ -55,6 +57,7 @@ class Config
      * Switch between sandbox and live keys based on the environment setting.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return string|null The API Encryption Key.
      */
     public function getApiEncryptionKey(?string $salesChannelId = null): ?string
@@ -70,6 +73,7 @@ class Config
      * Checks if the plugin is in sandbox (test) mode.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return bool True if sandbox mode is enabled, false otherwise.
      */
     public function isSandbox(?string $salesChannelId = null): bool
@@ -81,6 +85,7 @@ class Config
      * Returns the payment method title displayed to the customer.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return string The configured title or a default value.
      */
     public function getTitle(?string $salesChannelId = null): string
@@ -92,6 +97,7 @@ class Config
      * Returns the payment method description displayed to the customer.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return string The configured description or a default value.
      */
     public function getDescription(?string $salesChannelId = null): string
@@ -103,6 +109,7 @@ class Config
      * Returns the logo URL for the payment customization.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return string|null The logo URL.
      */
     public function getLogo(?string $salesChannelId = null): ?string
@@ -114,6 +121,7 @@ class Config
      * Checks if debug logging is enabled.
      *
      * @param string|null $salesChannelId The sales channel ID for scoped configuration.
+     *
      * @return bool True if debug logging is enabled, false otherwise.
      */
     public function isDebugEnabled(?string $salesChannelId = null): bool

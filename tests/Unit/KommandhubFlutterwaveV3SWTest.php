@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Kommandhub\FlutterwaveV3SW\Tests\Unit;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwaveTransactionHandler;
 use Kommandhub\FlutterwaveV3SW\KommandhubFlutterwaveV3SW;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\IdSearchResult;
 use Shopware\Core\Framework\Plugin\Context\ActivateContext;
 use Shopware\Core\Framework\Plugin\Context\DeactivateContext;
@@ -120,7 +117,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $plugin = new KommandhubFlutterwaveV3SW(true, '');
         $installContext = $this->createMock(InstallContext::class);
         $installContext->method('getContext')->willReturn($this->context);
-        
+
         // No container set, should just return
         $plugin->install($installContext);
         $this->assertTrue(true); // Just to confirm no errors
@@ -147,7 +144,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $plugin = new KommandhubFlutterwaveV3SW(true, '');
         $activateContext = $this->createMock(ActivateContext::class);
         $activateContext->method('getContext')->willReturn($this->context);
-        
+
         $plugin->activate($activateContext);
         $this->assertTrue(true);
     }
@@ -173,7 +170,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $plugin = new KommandhubFlutterwaveV3SW(true, '');
         $uninstallContext = $this->createMock(UninstallContext::class);
         $uninstallContext->method('getContext')->willReturn($this->context);
-        
+
         $plugin->uninstall($uninstallContext);
         $this->assertTrue(true);
     }

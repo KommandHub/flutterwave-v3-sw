@@ -62,7 +62,7 @@ class KommandhubFlutterwaveV3SW extends Plugin
             if ($this->container === null) {
                 return;
             }
-        } catch (\Error $e) {
+        } catch (\Throwable) { // @phpstan-ignore-line
             return;
         }
 
@@ -100,7 +100,7 @@ class KommandhubFlutterwaveV3SW extends Plugin
             if ($this->container === null) {
                 return;
             }
-        } catch (\Error $e) {
+        } catch (\Throwable) { // @phpstan-ignore-line
             return;
         }
 
@@ -128,9 +128,9 @@ class KommandhubFlutterwaveV3SW extends Plugin
             if ($this->container === null) {
                 return null;
             }
-        } catch (\Error $e) { // @codeCoverageIgnoreStart
+        } catch (\Throwable) { // @phpstan-ignore-line
             return null;
-        } // @codeCoverageIgnoreEnd
+        }
 
         /** @var EntityRepository $paymentMethodRepository */
         $paymentMethodRepository = $this->container->get('payment_method.repository');
@@ -141,4 +141,3 @@ class KommandhubFlutterwaveV3SW extends Plugin
         return $paymentMethodRepository->searchIds($paymentCriteria, Context::createDefaultContext())->firstId();
     }
 }
-
