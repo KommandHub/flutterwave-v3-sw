@@ -6,6 +6,7 @@
 
 # Flutterwave for Shopware 6
 
+[![Shopware Plugin CI](https://github.com/KommandHub/flutterwave-v3-sw/actions/workflows/php.yml/badge.svg)](https://github.com/KommandHub/flutterwave-v3-sw/actions/workflows/php.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Shopware](https://img.shields.io/badge/Shopware-6.6%20%7C%206.7-blue)
 
