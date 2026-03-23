@@ -209,6 +209,7 @@ class FlutterwaveTransactionHandler extends AbstractPaymentHandler
         $expectedCurrency = $orderTransaction->getOrder()?->getCurrency()?->getIsoCode();
 
         $actualAmount = 0.0;
+
         if (isset($data['amount']) && is_numeric($data['amount'])) {
             $actualAmount = (float)$data['amount'];
         }
