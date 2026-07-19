@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FinalizeProcessor;
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Transaction as TransactionResource;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FinalizeProcessor;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Client\Resource\Transaction as TransactionResource;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Price\Struct\CalculatedPrice;
 use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTaxCollection;

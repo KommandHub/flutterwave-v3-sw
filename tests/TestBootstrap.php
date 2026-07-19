@@ -7,7 +7,7 @@ use Shopware\Core\TestBootstrapper;
 $loader = (new TestBootstrapper())
     ->setPlatformEmbedded(true)
     ->addCallingPlugin()
-    ->addActivePlugins('KommandhubFlutterwaveV3SW')
+    ->addActivePlugins('KommandhubFlutterwaveSW')
     ->setForceInstallPlugins(true)
     ->bootstrap()
     ->getClassLoader();
@@ -23,5 +23,5 @@ $loader = (new TestBootstrapper())
  * test. Mapping the namespace here keeps the suite deterministic instead of
  * dependent on whichever composer state the previous run left behind.
  */
-$loader->addPsr4('Kommandhub\\FlutterwaveV3SW\\', \dirname(__DIR__) . '/src');
-$loader->addPsr4('Kommandhub\\FlutterwaveV3SW\\Tests\\', __DIR__);
+$loader->addPsr4('Kommandhub\\FlutterwaveSW\\', \dirname(__DIR__) . '/src');
+$loader->addPsr4('Kommandhub\\FlutterwaveSW\\Tests\\', __DIR__);

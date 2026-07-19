@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Service;
 
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Framework\Context;

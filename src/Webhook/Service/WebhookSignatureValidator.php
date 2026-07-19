@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Service;
+namespace Kommandhub\FlutterwaveSW\Webhook\Service;
 
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Logging;
+namespace Kommandhub\FlutterwaveSW\Logging;
 
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;

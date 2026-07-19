@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Client\Resource;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Client\Resource;
 
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\ResponseInterface;

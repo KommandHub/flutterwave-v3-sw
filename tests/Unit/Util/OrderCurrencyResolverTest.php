@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Util;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Util;
 
-use Kommandhub\FlutterwaveV3SW\Util\OrderCurrencyResolver;
+use Kommandhub\FlutterwaveSW\Util\OrderCurrencyResolver;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;

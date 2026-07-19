@@ -6,7 +6,7 @@
 
 # Flutterwave Payment for Shopware 6
 
-[![Shopware Plugin CI](https://github.com/KommandHub/flutterwave-v3-sw/actions/workflows/php.yml/badge.svg)](https://github.com/KommandHub/flutterwave-v3-sw/actions/workflows/php.yml)
+[![Shopware Plugin CI](https://github.com/KommandHub/flutterwave-sw/actions/workflows/php.yml/badge.svg)](https://github.com/KommandHub/flutterwave-sw/actions/workflows/php.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Shopware](https://img.shields.io/badge/Shopware-6.6%20%7C%206.7-blue.svg)](https://shopware.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-777bb4.svg)](https://www.php.net)
@@ -181,9 +181,9 @@ as `externalReference` — the correlation key the webhook looks it up by
 ## Directory Structure
 
 ```text
-KommandhubFlutterwaveV3SW/
+KommandhubFlutterwaveSW/
 ├── src/
-│   ├── KommandhubFlutterwaveV3SW.php     # Plugin base class (lifecycle hooks)
+│   ├── KommandhubFlutterwaveSW.php     # Plugin base class (lifecycle hooks)
 │   ├── Administration/
 │   │   └── Controller/RefundController.php  # Admin refund API + refund-history endpoint
 │   ├── BankVerification/
@@ -255,9 +255,9 @@ KommandhubFlutterwaveV3SW/
 ### Via Composer (recommended)
 
 ```bash
-composer require kommandhub/flutterwave-v3-sw
+composer require kommandhub/flutterwave-sw
 bin/console plugin:refresh
-bin/console plugin:install --activate KommandhubFlutterwaveV3SW
+bin/console plugin:install --activate KommandhubFlutterwaveSW
 bin/console cache:clear
 ```
 
@@ -277,8 +277,8 @@ The repository ships a Docker Compose stack based on [`dockware`](https://dockwa
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url> KommandhubFlutterwaveV3SW
-cd KommandhubFlutterwaveV3SW
+git clone <repository-url> KommandhubFlutterwaveSW
+cd KommandhubFlutterwaveSW
 
 # 2. Start the stack (builds the container and prepares the shop)
 make up
@@ -286,12 +286,12 @@ make up
 # 3. Install and activate the plugin inside the container
 make shell
 bin/console plugin:refresh
-bin/console plugin:install --activate KommandhubFlutterwaveV3SW
+bin/console plugin:install --activate KommandhubFlutterwaveSW
 bin/console cache:clear
 exit
 ```
 
-The plugin directory is mounted at `/var/www/html/custom/static-plugins/KommandhubFlutterwaveV3SW`; `.git/`, `node_modules/`, and `vendor/` are excluded from the mount. Changes to source files on the host are reflected immediately in the container.
+The plugin directory is mounted at `/var/www/html/custom/static-plugins/KommandhubFlutterwaveSW`; `.git/`, `node_modules/`, and `vendor/` are excluded from the mount. Changes to source files on the host are reflected immediately in the container.
 
 Default dockware credentials:
 
@@ -306,7 +306,7 @@ The stack is defined in [`docker-compose.yml`](docker-compose.yml) and built fro
 
 - **Base image**: `dockware/shopware:6.7.8.0`
 - **Added tooling**: [`shopware-cli`](https://sw-cli.fos.gg/) — the static binary is copied from the upstream `shopware/shopware-cli:bin` image (latest stable, ~50 MB, multi-arch), so no package manager or cleanup is involved. The build runs `shopware-cli --version` so a broken install fails the image build rather than the first `make validate-plugin`. Pin it for a reproducible build by passing `--build-arg SHOPWARE_CLI_IMAGE=shopware/shopware-cli:bin@sha256:<digest>`.
-- **Container**: `shopware-flutterwave-v3`
+- **Container**: `shopware-flutterwave`
 - **PHP**: 8.3 (`XDEBUG_ENABLED` toggle available)
 - **Persistent volume**: `database` (MySQL data)
 
@@ -357,7 +357,7 @@ make cs-fix && make analyse && make test
 
 ## Configuration Options
 
-Configure the plugin under **Extensions → My Extensions → Flutterwave → Configuration**. Options are stored in Shopware's system configuration under the `KommandhubFlutterwaveV3SW.config.*` domain and read through `Setting\Service\Config`.
+Configure the plugin under **Extensions → My Extensions → Flutterwave → Configuration**. Options are stored in Shopware's system configuration under the `KommandhubFlutterwaveSW.config.*` domain and read through `Setting\Service\Config`.
 
 | Key | Type | Purpose |
 | --- | --- | --- |
@@ -484,11 +484,11 @@ Logging goes through `Logging\ConfigurableLogger`, wired to the `flutterwave_cha
 
 ## Deployment
 
-1. Ship the plugin via Composer (`composer require kommandhub/flutterwave-v3-sw`) or an Administration upload.
+1. Ship the plugin via Composer (`composer require kommandhub/flutterwave-sw`) or an Administration upload.
 2. Run:
    ```bash
    bin/console plugin:refresh
-   bin/console plugin:update KommandhubFlutterwaveV3SW
+   bin/console plugin:update KommandhubFlutterwaveSW
    bin/console cache:clear
    ```
 3. Ensure compiled Administration and Storefront assets are built and committed as part of the release.

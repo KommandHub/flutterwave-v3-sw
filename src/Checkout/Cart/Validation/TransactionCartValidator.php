@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Cart\Validation;
+namespace Kommandhub\FlutterwaveSW\Checkout\Cart\Validation;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Cart\Error\ConfigurationError;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwavePaymentHandler;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Checkout\Cart\Error\ConfigurationError;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\FlutterwavePaymentHandler;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use Shopware\Core\Checkout\Cart\Cart;
 use Shopware\Core\Checkout\Cart\CartValidatorInterface;
 use Shopware\Core\Checkout\Cart\Error\ErrorCollection;

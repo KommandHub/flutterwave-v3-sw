@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Client\Resource;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Client\Resource;
 
-use Kommandhub\FlutterwaveV3SW\Client\Http\HttpClientInterface;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\ApiResource;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Transaction;
-use Kommandhub\FlutterwaveV3SW\Exception\FlutterwaveException;
+use Kommandhub\FlutterwaveSW\Client\Http\HttpClientInterface;
+use Kommandhub\FlutterwaveSW\Client\Resource\ApiResource;
+use Kommandhub\FlutterwaveSW\Client\Resource\Transaction;
+use Kommandhub\FlutterwaveSW\Exception\FlutterwaveException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

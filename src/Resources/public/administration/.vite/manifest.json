@@ -1,11 +1,11 @@
 {
   "main.js": {
-    "file": "assets/kommandhub-flutterwave-v3-s-w-i7uujBXf.js",
-    "name": "kommandhub-flutterwave-v3-s-w",
+    "file": "assets/kommandhub-flutterwave-s-w-CF28VyuC.js",
+    "name": "kommandhub-flutterwave-s-w",
     "src": "main.js",
     "isEntry": true,
     "css": [
-      "assets/kommandhub-flutterwave-v3-s-w-D72_ykDM.css"
+      "assets/kommandhub-flutterwave-s-w-D72_ykDM.css"
     ],
     "assets": [
       "assets/icon-BT1AMZmi.png"

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Integration\Checkout\Payment;
+namespace Kommandhub\FlutterwaveSW\Tests\Integration\Checkout\Payment;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwavePaymentHandler;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FinalizeProcessor;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\PaymentProcessor;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundProcessor;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\FlutterwaveInitializationResponse;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\FlutterwavePaymentHandler;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FinalizeProcessor;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\PaymentProcessor;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundProcessor;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Struct\FlutterwaveInitializationResponse;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;

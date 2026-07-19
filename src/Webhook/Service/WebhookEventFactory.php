@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Service;
+namespace Kommandhub\FlutterwaveSW\Webhook\Service;
 
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\ChargeCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\RefundCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\WebhookEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Event\ChargeCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Event\RefundCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Event\WebhookEvent;
 use Shopware\Core\Framework\Context;
 
 /**

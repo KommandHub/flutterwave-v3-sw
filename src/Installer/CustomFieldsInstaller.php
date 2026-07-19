@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Installer;
+namespace Kommandhub\FlutterwaveSW\Installer;
 
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
 use Shopware\Core\Checkout\Customer\CustomerDefinition;
 use Shopware\Core\Defaults;
 use Shopware\Core\Framework\Context;

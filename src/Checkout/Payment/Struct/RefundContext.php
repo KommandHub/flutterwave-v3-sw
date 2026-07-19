@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Struct;
 
 /**
  * Everything the refund flow needs to know about a transaction before an
  * amount can be validated and sent to Flutterwave, resolved once by
- * {@see \Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundEligibilityResolver}
+ * {@see \Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundEligibilityResolver}
  * and then threaded through the rest of the flow.
  *
  * Bundling these as one value object (rather than passing four loose

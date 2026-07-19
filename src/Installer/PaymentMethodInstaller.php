@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Installer;
+namespace Kommandhub\FlutterwaveSW\Installer;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwavePaymentHandler;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\FlutterwavePaymentHandler;
 use Shopware\Core\Checkout\Payment\PaymentMethodCollection;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;

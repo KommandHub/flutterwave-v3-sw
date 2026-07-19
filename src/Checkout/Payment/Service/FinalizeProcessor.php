@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveCurrencyHelper;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveCurrencyHelper;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler;
 use Shopware\Core\Checkout\Payment\Cart\PaymentTransactionStruct;

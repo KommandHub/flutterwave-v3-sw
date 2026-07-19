@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Service;
+namespace Kommandhub\FlutterwaveSW\Webhook\Service;
 
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
 use Shopware\Core\Framework\Context;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;

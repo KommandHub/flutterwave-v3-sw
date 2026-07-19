@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit;
 
-use Kommandhub\FlutterwaveV3SW\KommandhubFlutterwaveV3SW;
+use Kommandhub\FlutterwaveSW\KommandhubFlutterwaveSW;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
@@ -17,9 +17,9 @@ use Shopware\Core\Framework\Plugin\Context\UpdateContext;
 use Shopware\Core\Framework\Plugin\Util\PluginIdProvider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class KommandhubFlutterwaveV3SWTest extends TestCase
+class KommandhubFlutterwaveSWTest extends TestCase
 {
-    private KommandhubFlutterwaveV3SW $plugin;
+    private KommandhubFlutterwaveSW $plugin;
     private ContainerInterface $container;
     private EntityRepository $paymentRepository;
     private EntityRepository $customFieldSetRepository;
@@ -28,7 +28,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->plugin = new KommandhubFlutterwaveV3SW(true, '');
+        $this->plugin = new KommandhubFlutterwaveSW(true, '');
         $this->container = $this->createMock(ContainerInterface::class);
         $this->plugin->setContainer($this->container);
         $this->paymentRepository = $this->createMock(EntityRepository::class);
@@ -167,7 +167,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         // Self-contained: the fieldset repository must report an existing
         // fieldset so uninstall deletes it, which the shared setUp deliberately
         // stubs empty for the install-path tests.
-        $plugin = new KommandhubFlutterwaveV3SW(true, '');
+        $plugin = new KommandhubFlutterwaveSW(true, '');
         $container = $this->createMock(ContainerInterface::class);
         $plugin->setContainer($container);
 
@@ -199,7 +199,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
 
     public function testAddPaymentMethodSkippedIfNoContainer(): void
     {
-        $plugin = new KommandhubFlutterwaveV3SW(true, '');
+        $plugin = new KommandhubFlutterwaveSW(true, '');
         $installContext = $this->createMock(InstallContext::class);
         $installContext->method('getContext')->willReturn($this->context);
 
@@ -211,7 +211,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
 
     public function testUninstallSkippedIfNoContainer(): void
     {
-        $plugin = new KommandhubFlutterwaveV3SW(true, '');
+        $plugin = new KommandhubFlutterwaveSW(true, '');
         $uninstallContext = $this->createMock(UninstallContext::class);
         $uninstallContext->method('getContext')->willReturn($this->context);
 

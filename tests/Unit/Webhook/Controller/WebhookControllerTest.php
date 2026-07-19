@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Webhook\Controller;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Webhook\Controller;
 
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Webhook\Controller\WebhookController;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookProcessor;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Webhook\Controller\WebhookController;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookProcessor;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

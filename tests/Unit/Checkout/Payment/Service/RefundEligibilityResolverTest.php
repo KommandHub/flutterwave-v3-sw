@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundEligibilityResolver;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\RefundContext;
-use Kommandhub\FlutterwaveV3SW\Exception\RefundValidationException;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveTransactionReader;
-use Kommandhub\FlutterwaveV3SW\Util\OrderCurrencyResolver;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundEligibilityResolver;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Struct\RefundContext;
+use Kommandhub\FlutterwaveSW\Exception\RefundValidationException;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveTransactionReader;
+use Kommandhub\FlutterwaveSW\Util\OrderCurrencyResolver;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;

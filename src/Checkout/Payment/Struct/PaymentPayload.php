@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Struct;
 
 /**
  * Payload for a Flutterwave V3 Standard checkout (POST /payments).

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Service;
 
-use Kommandhub\FlutterwaveV3SW\Service\PayloadBuilder;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Service\PayloadBuilder;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Price\Struct\CalculatedPrice;
 use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTaxCollection;

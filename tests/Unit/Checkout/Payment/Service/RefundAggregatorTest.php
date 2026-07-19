@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundAggregator;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundAggregator;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Price\Struct\CalculatedPrice;
 use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTaxCollection;

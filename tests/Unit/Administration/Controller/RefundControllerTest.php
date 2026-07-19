@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Administration\Controller;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Administration\Controller;
 
-use Kommandhub\FlutterwaveV3SW\Administration\Controller\RefundController;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FlutterwaveRefundLedger;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundAmountCalculator;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundEligibilityResolver;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\RefundContext;
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Transaction;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveCurrencyHelper;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveTransactionReader;
-use Kommandhub\FlutterwaveV3SW\Util\OrderCurrencyResolver;
+use Kommandhub\FlutterwaveSW\Administration\Controller\RefundController;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FlutterwaveRefundLedger;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundAmountCalculator;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundEligibilityResolver;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Struct\RefundContext;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Client\Resource\Transaction;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveCurrencyHelper;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveTransactionReader;
+use Kommandhub\FlutterwaveSW\Util\OrderCurrencyResolver;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;

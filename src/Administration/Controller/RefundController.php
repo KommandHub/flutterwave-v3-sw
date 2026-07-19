@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Administration\Controller;
+namespace Kommandhub\FlutterwaveSW\Administration\Controller;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FlutterwaveRefundLedgerInterface;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundAmountCalculator;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundEligibilityResolver;
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Exception\RefundValidationException;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FlutterwaveRefundLedgerInterface;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundAmountCalculator;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundEligibilityResolver;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Exception\RefundValidationException;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Routing\ApiRouteScope;
 use Shopware\Core\PlatformRequest;

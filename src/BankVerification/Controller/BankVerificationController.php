@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\BankVerification\Controller;
+namespace Kommandhub\FlutterwaveSW\BankVerification\Controller;
 
-use Kommandhub\FlutterwaveV3SW\BankVerification\Service\BankValidationFactory;
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\BankVerification\Service\BankValidationFactory;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
 use Shopware\Core\Checkout\Customer\CustomerEntity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;

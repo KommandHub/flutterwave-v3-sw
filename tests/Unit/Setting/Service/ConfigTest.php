@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Setting\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Setting\Service;
 
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;

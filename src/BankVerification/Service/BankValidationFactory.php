@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\BankVerification\Service;
+namespace Kommandhub\FlutterwaveSW\BankVerification\Service;
 
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
 use Shopware\Core\Framework\Validation\DataValidationDefinition;
 use Shopware\Core\Framework\Validation\DataValidationFactoryInterface;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStates;

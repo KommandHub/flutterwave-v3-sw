@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\RefundContext;
-use Kommandhub\FlutterwaveV3SW\Exception\RefundValidationException;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveTransactionReader;
-use Kommandhub\FlutterwaveV3SW\Util\OrderCurrencyResolver;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Struct\RefundContext;
+use Kommandhub\FlutterwaveSW\Exception\RefundValidationException;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveTransactionReader;
+use Kommandhub\FlutterwaveSW\Util\OrderCurrencyResolver;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStates;
 

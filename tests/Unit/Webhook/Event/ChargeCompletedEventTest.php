@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Webhook\Event;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Webhook\Event;
 
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\ChargeCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Event\ChargeCompletedEvent;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Context;
 
@@ -55,7 +55,7 @@ class ChargeCompletedEventTest extends TestCase
             'key3' => '',
             'key4' => null,
         ];
-        $event = new class($data, Context::createDefaultContext()) extends \Kommandhub\FlutterwaveV3SW\Webhook\Event\WebhookEvent {
+        $event = new class($data, Context::createDefaultContext()) extends \Kommandhub\FlutterwaveSW\Webhook\Event\WebhookEvent {
             public static function getWebhookName(): string
             {
                 return 'test';

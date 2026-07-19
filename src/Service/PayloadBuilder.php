@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Service;
+namespace Kommandhub\FlutterwaveSW\Service;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\PaymentPayload;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Struct\PaymentPayload;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Checkout\Payment\Cart\PaymentTransactionStruct;
 

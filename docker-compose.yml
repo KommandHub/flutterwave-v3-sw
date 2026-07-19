@@ -5,22 +5,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: 'kommandhub-flutterwave-v3-plugin:6.7.8.0'
-    container_name: shopware-flutterwave-v3
+    image: 'kommandhub-flutterwave-plugin:6.7.8.0'
+    container_name: shopware-flutterwave
     environment:
       - 'XDEBUG_ENABLED=0'
       - 'PHP_VERSION=8.3'
     volumes:
       # ----------------------------------------------------------------------------------------------------------------------------------
       # PLUGINS
-      - "./:/var/www/html/custom/static-plugins/KommandhubFlutterwaveV3SW"
+      - "./:/var/www/html/custom/static-plugins/KommandhubFlutterwaveSW"
       - "database:/var/lib/mysql"
       - "./Makefile:/var/www/html/Makefile"
       # ----------------------------------------------------------------------------------------------------------------------------------
       # EXCLUDE
-      - "/var/www/html/custom/static-plugins/KommandhubFlutterwaveV3SW/.git/"
-      - "/var/www/html/custom/static-plugins/KommandhubFlutterwaveV3SW/node_modules/"
-      - "/var/www/html/custom/static-plugins/KommandhubFlutterwaveV3SW/vendor/"
+      - "/var/www/html/custom/static-plugins/KommandhubFlutterwaveSW/.git/"
+      - "/var/www/html/custom/static-plugins/KommandhubFlutterwaveSW/node_modules/"
+      - "/var/www/html/custom/static-plugins/KommandhubFlutterwaveSW/vendor/"
       # ----------------------------------------------------------------------------------------------------------------------------------
 
 volumes:

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Util\OrderCurrencyResolver;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveCurrencyHelper;
+use Kommandhub\FlutterwaveSW\Util\OrderCurrencyResolver;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveCurrencyHelper;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransactionCaptureRefund\OrderTransactionCaptureRefundStates;
 

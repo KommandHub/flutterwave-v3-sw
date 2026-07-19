@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Util;
+namespace Kommandhub\FlutterwaveSW\Util;
 
 /**
  * FlutterwaveConstants contains all fixed keys and string constants used throughout the Flutterwave plugin.
@@ -46,7 +46,7 @@ class FlutterwaveConstants
      * genuine redelivery. Processed ids are recorded here and re-checked before
      * a webhook is allowed to mutate an order.
      *
-     * @see \Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookDeduplicator
+     * @see \Kommandhub\FlutterwaveSW\Webhook\Service\WebhookDeduplicator
      */
     public const FIELD_PROCESSED_EVENTS = 'flutterwave_processed_events';
 

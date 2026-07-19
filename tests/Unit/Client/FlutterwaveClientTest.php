@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Client;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Client;
 
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Client\Http\HttpClientInterface;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\ApiResource;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Bank;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Bvn;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Refund;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Subaccount;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Transaction;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Client\Http\HttpClientInterface;
+use Kommandhub\FlutterwaveSW\Client\Resource\ApiResource;
+use Kommandhub\FlutterwaveSW\Client\Resource\Bank;
+use Kommandhub\FlutterwaveSW\Client\Resource\Bvn;
+use Kommandhub\FlutterwaveSW\Client\Resource\Refund;
+use Kommandhub\FlutterwaveSW\Client\Resource\Subaccount;
+use Kommandhub\FlutterwaveSW\Client\Resource\Transaction;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;

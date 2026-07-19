@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Util;
+namespace Kommandhub\FlutterwaveSW\Util;
 
 /**
  * Compares money amounts exactly, by scaling them to whole minor units.

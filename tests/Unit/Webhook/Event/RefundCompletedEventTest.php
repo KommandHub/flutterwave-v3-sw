@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Webhook\Event;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Webhook\Event;
 
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\RefundCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Event\RefundCompletedEvent;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Context;
 

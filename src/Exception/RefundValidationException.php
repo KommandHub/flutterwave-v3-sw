@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Exception;
+namespace Kommandhub\FlutterwaveSW\Exception;
 
 /**
  * Thrown when an admin refund request fails one of the plugin's own business

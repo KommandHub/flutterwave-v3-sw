@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment;
 
 use Shopware\Core\Checkout\Payment\Cart\PaymentHandler\AbstractPaymentHandler as ShopwareAbstractPaymentHandler;
 use Shopware\Core\Checkout\Payment\Cart\PaymentHandler\PaymentHandlerType;

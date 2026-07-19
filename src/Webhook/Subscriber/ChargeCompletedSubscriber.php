@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Subscriber;
+namespace Kommandhub\FlutterwaveSW\Webhook\Subscriber;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FinalizeProcessor;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\ChargeCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookDeduplicator;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FinalizeProcessor;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Webhook\Event\ChargeCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookDeduplicator;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStates;
 use Shopware\Core\Checkout\Payment\Cart\PaymentTransactionStruct;
 use Shopware\Core\Framework\Uuid\Uuid;

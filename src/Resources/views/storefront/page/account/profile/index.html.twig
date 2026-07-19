@@ -4,7 +4,7 @@
     {{ parent() }}
 
     {% block page_account_profile_flutterwave_bank_visibility %}
-        {% if config('KommandhubFlutterwaveV3SW.config.collectBankData') %}
+        {% if config('KommandhubFlutterwaveSW.config.collectBankData') %}
             {% block page_account_profile_flutterwave_bank_card %}
             <div class="card account-profile-bank mb-5">
                 <div class="card-body">
@@ -51,7 +51,7 @@
                                     {% endblock %}
 
                                     {% block page_account_profile_flutterwave_bank_form_bvn %}
-                                        {% if config('KommandhubFlutterwaveV3SW.config.showBvnField') %}
+                                        {% if config('KommandhubFlutterwaveSW.config.showBvnField') %}
                                             <div class="form-group col-12">
                                                 <label class="form-label" for="bvn">
                                                     {{ 'kommandhub-flutterwave.bank.bvnLabel'|trans|sw_sanitize }}
@@ -65,7 +65,7 @@
                                                     maxlength="11"
                                                     value="{{ customFields.kommandhub_flutterwave_bvn }}"
                                                     placeholder="{{ 'kommandhub-flutterwave.bank.bvnPlaceholder'|trans|sw_sanitize }}"
-                                                    {% if config('KommandhubFlutterwaveV3SW.config.requireBvn') %}required{% endif %}>
+                                                    {% if config('KommandhubFlutterwaveSW.config.requireBvn') %}required{% endif %}>
                                                 <div class="invalid-feedback"></div>
                                                 <div class="valid-feedback"></div>
                                             </div>

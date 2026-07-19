@@ -1,6 +1,6 @@
 {% block page_account_overview_flutterwave_bank_details %}
     {% block page_account_overview_flutterwave_bank_details_visibility %}
-        {% if config('KommandhubFlutterwaveV3SW.config.collectBankData') %}
+        {% if config('KommandhubFlutterwaveSW.config.collectBankData') %}
             {% block page_account_overview_flutterwave_bank_details_wrapper %}
             <div class="row js-account-overview-bank_details">
                 {% block page_account_overview_flutterwave_bank_details_inner %}
@@ -40,7 +40,7 @@
                                             {% endblock %}
 
                                             {% block page_account_overview_flutterwave_bank_details_bvn %}
-                                                {% if config('KommandhubFlutterwaveV3SW.config.showBvnField') %}
+                                                {% if config('KommandhubFlutterwaveSW.config.showBvnField') %}
                                                     {% set bvn = customFields.kommandhub_flutterwave_bvn %}
                                                     <p>
                                                         <strong>{{ 'kommandhub-flutterwave.bank.bvnLabel'|trans|sw_sanitize }}:</strong><br>

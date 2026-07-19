@@ -5,7 +5,7 @@
  * across components.
  */
 export const FLUTTERWAVE_HANDLER_IDENTIFIER =
-    'Kommandhub\\FlutterwaveV3SW\\Checkout\\Payment\\FlutterwavePaymentHandler';
+    'Kommandhub\\FlutterwaveSW\\Checkout\\Payment\\FlutterwavePaymentHandler';
 
 /**
  * Custom-field key that reliably marks a transaction as Flutterwave's, used as a

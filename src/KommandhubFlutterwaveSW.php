@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW;
+namespace Kommandhub\FlutterwaveSW;
 
-use Kommandhub\FlutterwaveV3SW\Installer\CustomFieldsInstaller;
-use Kommandhub\FlutterwaveV3SW\Installer\PaymentMethodInstaller;
+use Kommandhub\FlutterwaveSW\Installer\CustomFieldsInstaller;
+use Kommandhub\FlutterwaveSW\Installer\PaymentMethodInstaller;
 use Shopware\Core\Checkout\Payment\PaymentMethodCollection;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
@@ -18,7 +18,7 @@ use Shopware\Core\Framework\Plugin\Context\UpdateContext;
 use Shopware\Core\Framework\Plugin\Util\PluginIdProvider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class KommandhubFlutterwaveV3SW extends Plugin
+class KommandhubFlutterwaveSW extends Plugin
 {
     /**
      * This plugin's own runtime dependencies (composer.json `require`) are
@@ -33,7 +33,7 @@ class KommandhubFlutterwaveV3SW extends Plugin
      * flake: Shopware's test bootstrapper force-reinstalls the plugin on every
      * run, which ran `composer remove` for it, wiping its entry — and PSR-4
      * mapping — from the root project's composer.json between test runs. That
-     * surfaced as "Class KommandhubFlutterwaveV3SW not found" on whichever run
+     * surfaced as "Class KommandhubFlutterwaveSW not found" on whichever run
      * followed a reinstall, or, when the class had already been autoloaded from
      * elsewhere in the same process, as this file silently reporting 0%
      * coverage despite being fully exercised.

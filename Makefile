@@ -2,12 +2,12 @@
 .PHONY: help up down build restart shell plugin-list test test-coverage cs cs-fix analyse fixture-load resync prepare validate-plugin cli changelog zip
 
 CONTAINER := shopware
-PLUGIN_DIR := custom/static-plugins/KommandhubFlutterwaveV3SW
+PLUGIN_DIR := custom/static-plugins/KommandhubFlutterwaveSW
 
 # Plugins installed via composer
 STATIC_PLUGINS := \
 	kommandhub/foundation-sw:KommandhubFoundationSW \
-	kommandhub/flutterwave-v3-sw:KommandhubFlutterwaveV3SW
+	kommandhub/flutterwave-sw:KommandhubFlutterwaveSW
 
 # Only plugins that should be copied into custom/static-plugins
 STATIC_COPY_PLUGINS := \
@@ -18,7 +18,7 @@ STATIC_COPY_PLUGINS := \
 # Composer therefore refuses to resolve a pre-release unless the requirement
 # carries its own stability flag:
 #
-#   Could not find a version of package kommandhub/flutterwave-v3-sw matching your
+#   Could not find a version of package kommandhub/flutterwave-sw matching your
 #   minimum-stability (stable).
 #
 # Composer's ladder is: dev < alpha < beta < RC < stable. A flag accepts its own
@@ -34,7 +34,7 @@ STATIC_COPY_PLUGINS := \
 # It is only permissive about *stability*, not about which package is chosen:
 # this plugin resolves from the custom/static-plugins path repository, which
 # offers exactly one candidate — the working tree being tested.
-PLUGIN_PACKAGE := kommandhub/flutterwave-v3-sw
+PLUGIN_PACKAGE := kommandhub/flutterwave-sw
 PLUGIN_STABILITY := *@dev
 
 # Composer install list (includes all). The package under development is

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Exception\FlutterwaveException;
+use Kommandhub\FlutterwaveSW\Exception\FlutterwaveException;
 
 /**
  * Reads Flutterwave's own refund records for a transaction.
  *
  * This plugin keeps local refund entities (see
- * {@see \Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService::createRefund()})
+ * {@see \Kommandhub\FlutterwaveSW\Service\OrderTransactionService::createRefund()})
  * but treats them as a local cache of intent, not the source of truth for
  * "how much of this transaction has been refunded" — Flutterwave's own
  * refund list is authoritative, since a refund can also be raised outside
@@ -22,7 +22,7 @@ use Kommandhub\FlutterwaveV3SW\Exception\FlutterwaveException;
  * client directly.
  *
  * Extracted as an interface — mirroring
- * {@see \Kommandhub\FlutterwaveV3SW\Client\Http\HttpClientInterface} — so
+ * {@see \Kommandhub\FlutterwaveSW\Client\Http\HttpClientInterface} — so
  * callers (the refund controller, tests) depend on "a source of refund
  * history" rather than on the concrete Flutterwave HTTP integration, and so
  * `FlutterwaveRefundLedger` can be replaced by a caching or locally-backed
