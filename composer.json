@@ -66,9 +66,9 @@
             "fr-FR": "Paiement Flutterwave par Kommandhub"
         },
         "description": {
-            "de-DE": "Professionelle Shopware 6-Integration für Flutterwave: Akzeptieren Sie sichere Zahlungen per Karte, Banküberweisung und Mobile Money in ganz Afrika.",
-            "en-GB": "Professional Shopware 6 integration for Flutterwave: accept secure payments via cards, bank transfers, and mobile money across Africa.",
-            "fr-FR": "Intégration professionnelle de Shopware 6 pour Flutterwave : acceptez des paiements sécurisés par carte, virement bancaire et mobile money dans toute l'Afrique."
+            "de-DE": "Professionelle, unabhängige Shopware-6-Integration für das Flutterwave-Zahlungsgateway: sichere Zahlungen per Karte, Banküberweisung und Mobile Money in Afrika, inkl. Erstattungen.",
+            "en-GB": "Professional, independent Shopware 6 integration for the Flutterwave payment gateway: secure card, bank transfer, and mobile money payments across Africa, with refunds and webhooks.",
+            "fr-FR": "Intégration Shopware 6 indépendante et professionnelle pour la passerelle Flutterwave : paiements sécurisés par carte, virement et mobile money en Afrique, avec remboursements."
         },
         "manufacturerLink": {
             "de-DE": "https://kommandhub.com",

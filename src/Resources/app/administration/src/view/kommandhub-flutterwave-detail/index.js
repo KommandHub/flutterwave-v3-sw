@@ -8,7 +8,7 @@ import {
     currencyDecimals,
 } from '../../service/refund-calculator';
 
-const { Store, Mixin } = Shopware;
+const { Mixin } = Shopware;
 const { Criteria } = Shopware.Data;
 
 const CF = {

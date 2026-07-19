@@ -45,6 +45,14 @@ class TransactionCartValidator implements CartValidatorInterface
             $paymentMethod = $context->getPaymentMethod();
             /** @var string $name */
             $name = $paymentMethod->getTranslation('name') ?? '';
+
+            // Shopware 6.8 reorders this constructor to ($id, $name, $reason).
+            // The plugin currently targets 6.6/6.7, whose signature is
+            // ($name, $reason, $id) — the order used here. Reordering now would
+            // pass wrong values on the supported range, so the deprecation is
+            // suppressed and the reorder deferred until 6.8 is added to the
+            // supported versions.
+            // @phpstan-ignore method.deprecated
             $errors->add(new PaymentMethodBlockedError($name, 'Zero value cart', $paymentMethod->getId()));
         }
     }
