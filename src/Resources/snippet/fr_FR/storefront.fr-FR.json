@@ -1,0 +1,18 @@
+{
+  "kommandhub-flutterwave": {
+    "bank": {
+      "title": "Coordonnées bancaires",
+      "bankNameLabel": "Nom de la banque",
+      "bankNamePlaceholder": "Sélectionnez votre banque",
+      "accountNumberLabel": "Numéro de compte",
+      "accountNumberPlaceholder": "Saisissez votre numéro de compte à 10 chiffres",
+      "accountNameLabel": "Nom du titulaire",
+      "accountNamePlaceholder": "Le nom du titulaire sera rempli automatiquement",
+      "bvnLabel": "BVN (numéro de vérification bancaire)",
+      "bvnPlaceholder": "Saisissez votre BVN à 11 chiffres",
+      "saveButton": "Enregistrer les coordonnées bancaires",
+      "saveSuccess": "Coordonnées bancaires enregistrées avec succès.",
+      "saveError": "Veuillez corriger les erreurs suivantes :"
+    }
+  }
+}

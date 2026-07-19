@@ -3,11 +3,11 @@
   "entryPoints": {
     "kommandhub-flutterwave-v3-s-w": {
       "css": [
-        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-CQM8eMS4.css"
+        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-D72_ykDM.css"
       ],
       "dynamic": [],
       "js": [
-        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-VLU_DqTR.js"
+        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-i7uujBXf.js"
       ],
       "legacy": false,
       "preload": []

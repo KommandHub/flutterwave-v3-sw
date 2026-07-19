@@ -1,15 +1,50 @@
 {
   "kommandhub-flutterwave-detail": {
     "title": "Flutterwave",
-    "summary": {
-      "chargedAmount": "Charged Amount",
-      "paymentChannel": "Payment Channel"
-    },
+    "header": "Flutterwave Transaction Details",
     "grid": {
+      "chargedAmount": "Charged Amount",
+      "settledAmount": "Settled Amount",
       "reference": "Flutterwave Reference",
       "transactionId": "Flutterwave Transaction ID",
       "processingFee": "Processing Fee",
-      "verifiedAt": "Verified At"
+      "channel": "Payment Channel",
+      "paymentMethod": "Payment Method",
+      "state": "State",
+      "verifiedAt": "Verified At",
+      "refund": "Refund"
+    },
+    "captures": {
+      "title": "Captures",
+      "grid": {
+        "amount": "Amount",
+        "state": "State",
+        "createdAt": "Created At",
+        "refunds": "View Refunds"
+      }
+    },
+    "refunds": {
+      "title": "Refund History",
+      "listModalTitle": "Refund History",
+      "grid": {
+        "amount": "Amount",
+        "state": "State",
+        "externalReference": "Flutterwave Refund ID",
+        "createdAt": "Created At"
+      }
+    },
+    "refund": {
+      "modalTitle": "Refund Flutterwave Payment",
+      "amountLabel": "Refund Amount",
+      "amountPlaceholder": "Enter refund amount",
+      "amountHelpText": "The amount to refund, in the order currency. Cannot exceed the refundable balance.",
+      "currencyLabel": "Currency",
+      "commentsLabel": "Reason / Comments",
+      "commentsPlaceholder": "Optional note sent to Flutterwave",
+      "confirmButton": "Issue Refund",
+      "success": "The refund was submitted to Flutterwave successfully.",
+      "errorAmountTooLow": "Refund amount must be at least {minAmount}.",
+      "errorAmountTooHigh": "Refund amount cannot exceed {maxAmount}."
     },
     "emptyState": {
       "title": "No Flutterwave Transaction Found",

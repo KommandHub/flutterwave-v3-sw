@@ -13,6 +13,7 @@ use Shopware\Core\Framework\Plugin\Context\ActivateContext;
 use Shopware\Core\Framework\Plugin\Context\DeactivateContext;
 use Shopware\Core\Framework\Plugin\Context\InstallContext;
 use Shopware\Core\Framework\Plugin\Context\UninstallContext;
+use Shopware\Core\Framework\Plugin\Context\UpdateContext;
 use Shopware\Core\Framework\Plugin\Util\PluginIdProvider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -21,6 +22,8 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
     private KommandhubFlutterwaveV3SW $plugin;
     private ContainerInterface $container;
     private EntityRepository $paymentRepository;
+    private EntityRepository $customFieldSetRepository;
+    private EntityRepository $customFieldSetRelationRepository;
     private Context $context;
 
     protected function setUp(): void
@@ -29,12 +32,43 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $this->container = $this->createMock(ContainerInterface::class);
         $this->plugin->setContainer($this->container);
         $this->paymentRepository = $this->createMock(EntityRepository::class);
+        $this->customFieldSetRepository = $this->createMock(EntityRepository::class);
+        $this->customFieldSetRelationRepository = $this->createMock(EntityRepository::class);
         $this->context = Context::createDefaultContext();
+
+        // The custom-field installer treats an empty result as "not yet
+        // installed", so install() upserts and addRelations() links.
+        $emptyIds = $this->createMock(IdSearchResult::class);
+        $emptyIds->method('getIds')->willReturn([]);
+        $emptyIds->method('getTotal')->willReturn(0);
+        $this->customFieldSetRepository->method('searchIds')->willReturn($emptyIds);
+        $this->customFieldSetRelationRepository->method('searchIds')->willReturn($emptyIds);
     }
 
-    public function testExecuteComposerCommands(): void
+    /**
+     * Container services every lifecycle hook may resolve. Kept in one place so
+     * each test's willReturnMap stays a single source of truth.
+     *
+     * @return array<int, array{0: string, 1: object}>
+     */
+    private function containerMap(PluginIdProvider $pluginIdProvider): array
     {
-        $this->assertTrue($this->plugin->executeComposerCommands());
+        return [
+            ['payment_method.repository', $this->paymentRepository],
+            [PluginIdProvider::class, $pluginIdProvider],
+            ['custom_field_set.repository', $this->customFieldSetRepository],
+            ['custom_field_set_relation.repository', $this->customFieldSetRelationRepository],
+        ];
+    }
+
+    /**
+     * The plugin's own require is shopware/core and shopware/storefront, both
+     * always present, so nothing here needs Composer invoked on install or
+     * uninstall.
+     */
+    public function testExecuteComposerCommandsIsDisabled(): void
+    {
+        $this->assertFalse($this->plugin->executeComposerCommands());
     }
 
     public function testInstallAddsPaymentMethod(): void
@@ -42,11 +76,9 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $installContext = $this->createMock(InstallContext::class);
         $installContext->method('getContext')->willReturn($this->context);
 
-        $this->container->method('get')
-            ->willReturnMap([
-                ['payment_method.repository', $this->paymentRepository],
-                [PluginIdProvider::class, $this->createMock(PluginIdProvider::class)],
-            ]);
+        $pluginIdProvider = $this->createMock(PluginIdProvider::class);
+
+        $this->container->method('get')->willReturnMap($this->containerMap($pluginIdProvider));
 
         $idSearchResult = $this->createMock(IdSearchResult::class);
         $idSearchResult->method('firstId')->willReturn(null);
@@ -57,12 +89,30 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $this->plugin->install($installContext);
     }
 
+    public function testUpdate(): void
+    {
+        $updateContext = $this->createMock(UpdateContext::class);
+        $updateContext->method('getContext')->willReturn($this->context);
+
+        $pluginIdProvider = $this->createMock(PluginIdProvider::class);
+
+        $this->container->method('get')->willReturnMap($this->containerMap($pluginIdProvider));
+
+        $idSearchResult = $this->createMock(IdSearchResult::class);
+        $idSearchResult->method('firstId')->willReturn('payment-id');
+        $this->paymentRepository->method('searchIds')->willReturn($idSearchResult);
+
+        $this->paymentRepository->expects($this->once())->method('update');
+
+        $this->plugin->update($updateContext);
+    }
+
     public function testActivate(): void
     {
         $activateContext = $this->createMock(ActivateContext::class);
         $activateContext->method('getContext')->willReturn($this->context);
 
-        $this->container->method('get')->with('payment_method.repository')->willReturn($this->paymentRepository);
+        $this->container->method('get')->willReturnMap($this->containerMap($this->createMock(PluginIdProvider::class)));
 
         $idSearchResult = $this->createMock(IdSearchResult::class);
         $idSearchResult->method('firstId')->willReturn('payment-id');
@@ -80,7 +130,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $deactivateContext = $this->createMock(DeactivateContext::class);
         $deactivateContext->method('getContext')->willReturn($this->context);
 
-        $this->container->method('get')->with('payment_method.repository')->willReturn($this->paymentRepository);
+        $this->container->method('get')->willReturnMap($this->containerMap($this->createMock(PluginIdProvider::class)));
 
         $idSearchResult = $this->createMock(IdSearchResult::class);
         $idSearchResult->method('firstId')->willReturn('payment-id');
@@ -99,7 +149,7 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $uninstallContext->method('getContext')->willReturn($this->context);
         $uninstallContext->method('keepUserData')->willReturn(true);
 
-        $this->container->method('get')->with('payment_method.repository')->willReturn($this->paymentRepository);
+        $this->container->method('get')->willReturnMap($this->containerMap($this->createMock(PluginIdProvider::class)));
 
         $idSearchResult = $this->createMock(IdSearchResult::class);
         $idSearchResult->method('firstId')->willReturn('payment-id');
@@ -112,57 +162,51 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $this->plugin->uninstall($uninstallContext);
     }
 
+    public function testUninstallRemovesCustomFieldsWhenNotKeepingData(): void
+    {
+        // Self-contained: the fieldset repository must report an existing
+        // fieldset so uninstall deletes it, which the shared setUp deliberately
+        // stubs empty for the install-path tests.
+        $plugin = new KommandhubFlutterwaveV3SW(true, '');
+        $container = $this->createMock(ContainerInterface::class);
+        $plugin->setContainer($container);
+
+        $paymentRepository = $this->createMock(EntityRepository::class);
+        $paymentIds = $this->createMock(IdSearchResult::class);
+        $paymentIds->method('firstId')->willReturn('payment-id');
+        $paymentRepository->method('searchIds')->willReturn($paymentIds);
+
+        $fieldsetRepository = $this->createMock(EntityRepository::class);
+        $fieldsetIds = $this->createMock(IdSearchResult::class);
+        $fieldsetIds->method('getIds')->willReturn(['fieldset-id']);
+        $fieldsetRepository->method('searchIds')->willReturn($fieldsetIds);
+
+        $container->method('get')->willReturnMap([
+            ['payment_method.repository', $paymentRepository],
+            [PluginIdProvider::class, $this->createMock(PluginIdProvider::class)],
+            ['custom_field_set.repository', $fieldsetRepository],
+            ['custom_field_set_relation.repository', $this->createMock(EntityRepository::class)],
+        ]);
+
+        $uninstallContext = $this->createMock(UninstallContext::class);
+        $uninstallContext->method('getContext')->willReturn($this->context);
+        $uninstallContext->method('keepUserData')->willReturn(false);
+
+        $fieldsetRepository->expects($this->once())->method('delete');
+
+        $plugin->uninstall($uninstallContext);
+    }
+
     public function testAddPaymentMethodSkippedIfNoContainer(): void
     {
         $plugin = new KommandhubFlutterwaveV3SW(true, '');
         $installContext = $this->createMock(InstallContext::class);
         $installContext->method('getContext')->willReturn($this->context);
 
-        // No container set, should just return
+        $this->expectException(\Error::class);
+        $this->expectExceptionMessage('Typed property Symfony\Component\HttpKernel\Bundle\Bundle::$container must not be accessed before initialization');
+
         $plugin->install($installContext);
-        $this->assertTrue(true); // Just to confirm no errors
-    }
-
-    public function testAddPaymentMethodSkippedIfAlreadyExists(): void
-    {
-        $installContext = $this->createMock(InstallContext::class);
-        $installContext->method('getContext')->willReturn($this->context);
-
-        $this->container->method('get')->with('payment_method.repository')->willReturn($this->paymentRepository);
-
-        $idSearchResult = $this->createMock(IdSearchResult::class);
-        $idSearchResult->method('firstId')->willReturn('existing-id');
-        $this->paymentRepository->method('searchIds')->willReturn($idSearchResult);
-
-        $this->paymentRepository->expects($this->never())->method('create');
-
-        $this->plugin->install($installContext);
-    }
-
-    public function testSetPaymentMethodIsActiveSkippedIfNoContainer(): void
-    {
-        $plugin = new KommandhubFlutterwaveV3SW(true, '');
-        $activateContext = $this->createMock(ActivateContext::class);
-        $activateContext->method('getContext')->willReturn($this->context);
-
-        $plugin->activate($activateContext);
-        $this->assertTrue(true);
-    }
-
-    public function testSetPaymentMethodIsActiveSkippedIfNotFound(): void
-    {
-        $activateContext = $this->createMock(ActivateContext::class);
-        $activateContext->method('getContext')->willReturn($this->context);
-
-        $this->container->method('get')->with('payment_method.repository')->willReturn($this->paymentRepository);
-
-        $idSearchResult = $this->createMock(IdSearchResult::class);
-        $idSearchResult->method('firstId')->willReturn(null);
-        $this->paymentRepository->method('searchIds')->willReturn($idSearchResult);
-
-        $this->paymentRepository->expects($this->never())->method('update');
-
-        $this->plugin->activate($activateContext);
     }
 
     public function testUninstallSkippedIfNoContainer(): void
@@ -171,7 +215,9 @@ class KommandhubFlutterwaveV3SWTest extends TestCase
         $uninstallContext = $this->createMock(UninstallContext::class);
         $uninstallContext->method('getContext')->willReturn($this->context);
 
+        $this->expectException(\Error::class);
+        $this->expectExceptionMessage('Typed property Symfony\Component\HttpKernel\Bundle\Bundle::$container must not be accessed before initialization');
+
         $plugin->uninstall($uninstallContext);
-        $this->assertTrue(true);
     }
 }

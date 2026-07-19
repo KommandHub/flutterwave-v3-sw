@@ -1,54 +1,45 @@
 {
     "name": "kommandhub/flutterwave-v3-sw",
-    "description": "Integrates the Flutterwave payment gateway into Shopware 6.",
+    "description": "Professional Shopware 6 integration for Flutterwave: accept secure payments via cards, bank transfers, and mobile money. Expand your reach across Africa with this reliable checkout solution.",
     "type": "shopware-platform-plugin",
-    "version": "1.0.0",
-    "license": "MIT",
+    "version": "0.9.0-beta.1",
+    "license": "Apache-2.0",
     "keywords": [
         "shopware",
         "shopware6",
-        "plugin",
-        "payment",
+        "shopware-plugin",
+        "shopware-payment",
         "flutterwave",
-        "gateway",
-        "e-commerce",
+        "payment",
+        "payment-gateway",
+        "checkout",
+        "refund",
+        "webhook",
+        "mobile-money",
+        "bank-transfer",
         "africa",
-        "kommandhub"
+        "nigeria",
+        "ecommerce"
     ],
-    "autoload": {
-        "psr-4": {
-            "Kommandhub\\FlutterwaveV3SW\\": "src/"
-        }
-    },
+    "homepage": "https://github.com/KommandHub/flutterwave-v3-sw",
     "authors": [
         {
-            "name": "Anitche Chisom",
-            "email": "admin@kommandhub.com",
+            "name": "Kommandhub Limited",
+            "email": "info@kommandhub.com",
+            "homepage": "https://kommandhub.com",
             "role": "Developer"
         }
     ],
+    "support": {
+        "email": "info@kommandhub.com",
+        "issues": "https://github.com/KommandHub/flutterwave-v3-sw/issues",
+        "source": "https://github.com/KommandHub/flutterwave-v3-sw",
+        "docs": "https://github.com/KommandHub/flutterwave-v3-sw/blob/main/README.md"
+    },
     "require": {
+        "php": ">=8.2",
         "shopware/core": "~6.6.0 || ~6.7.0",
-        "kommandhub/flutterwave-v3": "^1.0"
-    },
-    "extra": {
-        "shopware-plugin-class": "Kommandhub\\FlutterwaveV3SW\\KommandhubFlutterwaveV3SW",
-        "label": {
-            "de-DE": "Flutterwave für Shopware",
-            "en-GB": "Flutterwave for Shopware",
-            "fr-FR": "Flutterwave pour Shopware"
-        },
-        "description": {
-            "de-DE": "Integriert das Flutterwave-Zahlungs-Gateway in Shopware 6.",
-            "en-GB": "Integrates the Flutterwave payment gateway into Shopware 6.",
-            "fr-FR": "Intègre la passerelle de paiement Flutterwave dans Shopware 6."
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "symfony/runtime": true,
-            "php-http/discovery": true
-        }
+        "shopware/storefront": "~6.6.0 || ~6.7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.5",
@@ -56,5 +47,45 @@
         "friendsofphp/php-cs-fixer": "^3.94",
         "phpstan/phpstan": "^2.1",
         "rregeer/phpunit-coverage-check": "^0.3.1"
-    }
+    },
+    "autoload": {
+        "psr-4": {
+            "Kommandhub\\FlutterwaveV3SW\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kommandhub\\FlutterwaveV3SW\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Kommandhub\\FlutterwaveV3SW\\KommandhubFlutterwaveV3SW",
+        "label": {
+            "de-DE": "Flutterwave-Zahlung von Kommandhub",
+            "en-GB": "Flutterwave Payment by Kommandhub",
+            "fr-FR": "Paiement Flutterwave par Kommandhub"
+        },
+        "description": {
+            "de-DE": "Professionelle Shopware 6-Integration für Flutterwave: Akzeptieren Sie sichere Zahlungen per Karte, Banküberweisung und Mobile Money in ganz Afrika.",
+            "en-GB": "Professional Shopware 6 integration for Flutterwave: accept secure payments via cards, bank transfers, and mobile money across Africa.",
+            "fr-FR": "Intégration professionnelle de Shopware 6 pour Flutterwave : acceptez des paiements sécurisés par carte, virement bancaire et mobile money dans toute l'Afrique."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://kommandhub.com",
+            "en-GB": "https://kommandhub.com"
+        },
+        "supportLink": {
+            "de-DE": "https://kommandhub.com/support",
+            "en-GB": "https://kommandhub.com/support"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "symfony/runtime": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }

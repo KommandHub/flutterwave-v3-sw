@@ -1,128 +1,319 @@
 {% block sw_order_document_card %}
     {% block kommandhub_flutterwave_detail_card %}
     <mt-card
+            v-if="order"
             position-identifier="sw-order-document-card"
             class="kommandhub-flutterwave-detail-card"
     >
-        {% block kommandhub_flutterwave_detail_card_grid %}
-        <template #grid>
-            {% block kommandhub_flutterwave_detail_content %}
-            <sw-container
-                    v-if="flutterwaveTransaction"
-                    columns="1fr"
-                    gap="24px"
-                    class="kommandhub-flutterwave-detail-content"
+        {% block kommandhub_flutterwave_detail_card_banner %}
+            <div
+                    v-if="flutterwaveIcon"
+                    class="kommandhub-flutterwave-detail-card__banner"
             >
-                {% block kommandhub_flutterwave_detail_header %}
-                <div class="kommandhub-flutterwave-detail-header">
-                    {% block kommandhub_flutterwave_detail_icon %}
-                    <img
-                            v-if="flutterwaveIcon"
-                            :src="flutterwaveIcon"
-                            class="kommandhub-flutterwave-detail-card__icon"
-                            alt="Flutterwave logo"
-                    >
-                    {% endblock %}
-
-                    {% block kommandhub_flutterwave_detail_summary %}
-                    <div class="kommandhub-flutterwave-detail-summary">
-                        {% block kommandhub_flutterwave_detail_summary_amount %}
-                        <div class="kommandhub-flutterwave-detail-summary__item">
-                            <span class="kommandhub-flutterwave-detail-summary__label">{{ $t('kommandhub-flutterwave-detail.summary.chargedAmount') }}</span>
-                            <span class="kommandhub-flutterwave-detail-summary__value">
-                                {{ currencyFilter(
-                                    flutterwaveTransaction.customFields.flutterwave_amount_charged,
-                                    flutterwaveTransaction.customFields.flutterwave_currency
-                                ) }}
-                            </span>
-                        </div>
-                        {% endblock %}
-
-                        {% block kommandhub_flutterwave_detail_summary_channel %}
-                        <div class="kommandhub-flutterwave-detail-summary__item kommandhub-flutterwave-detail-summary__item--right">
-                            <span class="kommandhub-flutterwave-detail-summary__label">{{ $t('kommandhub-flutterwave-detail.summary.paymentChannel') }}</span>
-                            <sw-label
-                                    variant="info"
-                                    appearance="pill"
-                                    size="small"
-                            >
-                                {{ flutterwaveTransaction.customFields.flutterwave_payment_type }}
-                            </sw-label>
-                        </div>
-                        {% endblock %}
-                    </div>
-                    {% endblock %}
-                </div>
+                {% block kommandhub_flutterwave_detail_card_banner_icon %}
+                <img
+                        :src="flutterwaveIcon"
+                        class="kommandhub-flutterwave-detail-card__icon"
+                        alt="Flutterwave logo"
+                >
                 {% endblock %}
 
-                {% block kommandhub_flutterwave_detail_grid %}
-                <sw-container
-                        columns="1fr 1fr"
-                        gap="32px"
+                {% block kommandhub_flutterwave_detail_card_banner_title %}
+                <h3 class="kommandhub-flutterwave-detail-card__header">
+                    {{ $t('kommandhub-flutterwave-detail.header') }}
+                </h3>
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block kommandhub_flutterwave_detail_card_grid %}
+            <template #grid>
+                {% block kommandhub_flutterwave_detail_content %}
+                {% block kommandhub_flutterwave_detail_transaction_grid %}
+                <sw-data-grid
+                        v-if="flutterwaveTransaction"
+                        :data-source="flutterwaveTransactionData"
+                        :columns="flutterwaveTransactionColumns"
+                        :show-selection="false"
+                        :show-actions="true"
                         class="kommandhub-flutterwave-detail-grid"
                 >
-                    {% block kommandhub_flutterwave_detail_list_left %}
-                    <sw-description-list
-                            grid="1fr"
-                            class="kommandhub-flutterwave-detail-list"
-                    >
-                        {% block kommandhub_flutterwave_detail_list_left_reference %}
-                        <dt>{{ $t('kommandhub-flutterwave-detail.grid.reference') }}</dt>
-                        <dd class="kommandhub-flutterwave-detail-copyable">
-                            {{ flutterwaveTransaction.customFields.flutterwave_reference }}
-                        </dd>
+                    <template #column-amount="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_column_amount %}
+                        {{ currencyFilter(item.amount, item.currency) }}
                         {% endblock %}
+                    </template>
 
-                        {% block kommandhub_flutterwave_detail_list_left_transaction_id %}
-                        <dt>{{ $t('kommandhub-flutterwave-detail.grid.transactionId') }}</dt>
-                        <dd>{{ flutterwaveTransaction.customFields.flutterwave_transaction_id }}</dd>
+                    <template #column-settled="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_column_settled %}
+                        <template v-if="item.settled">{{ currencyFilter(item.settled, item.currency) }}</template>
+                        <template v-else>–</template>
                         {% endblock %}
-                    </sw-description-list>
-                    {% endblock %}
+                    </template>
 
-                    {% block kommandhub_flutterwave_detail_list_right %}
-                    <sw-description-list
-                            grid="1fr"
-                            class="kommandhub-flutterwave-detail-list"
-                    >
-                        {% block kommandhub_flutterwave_detail_list_right_fee %}
-                        <dt>{{ $t('kommandhub-flutterwave-detail.grid.processingFee') }}</dt>
-                        <dd>
-                            {{ currencyFilter(
-                                flutterwaveTransaction.customFields.flutterwave_transaction_fee,
-                                flutterwaveTransaction.customFields.flutterwave_currency
-                            ) }}
-                        </dd>
+                    <template #column-fee="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_column_fee %}
+                        {{ currencyFilter(item.fee, item.currency) }}
                         {% endblock %}
+                    </template>
 
-                        {% block kommandhub_flutterwave_detail_list_right_verified_at %}
-                        <dt>{{ $t('kommandhub-flutterwave-detail.grid.verifiedAt') }}</dt>
-                        <dd>
-                            <sw-time-ago
-                                    :date="flutterwaveTransaction.customFields.flutterwave_verified_at"
-                                    :date-time-format="{ month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }"
-                            />
-                        </dd>
+                    <template #column-channel="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_column_channel %}
+                        <sw-label v-if="item.channel" variant="info" appearance="pill" size="small">
+                            {{ item.channel }}
+                        </sw-label>
+                        <template v-else>–</template>
                         {% endblock %}
-                    </sw-description-list>
-                    {% endblock %}
-                </sw-container>
+                    </template>
+
+                    <template #column-paymentMethod="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_column_payment_method %}
+                        <template v-if="item.paymentMethod && item.paymentMethod.translated">
+                            {{ item.paymentMethod.translated.name }}
+                        </template>
+                        <template v-else>–</template>
+                        {% endblock %}
+                    </template>
+
+                    <template #column-state="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_column_state %}
+                        <sw-label
+                                v-if="item.state && item.state.translated"
+                                variant="neutral"
+                                appearance="pill"
+                        >
+                            {{ item.state.translated.name }}
+                        </sw-label>
+                        {% endblock %}
+                    </template>
+
+                    <template #column-verifiedAt="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_column_verified_at %}
+                        <sw-time-ago
+                                v-if="item.verifiedAt"
+                                :date="item.verifiedAt"
+                                :date-time-format="{ month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }"
+                        />
+                        <template v-else>–</template>
+                        {% endblock %}
+                    </template>
+
+                    <template #actions="{ item }">
+                        {% block kommandhub_flutterwave_detail_grid_actions_refund %}
+                        <sw-context-menu-item
+                                v-if="canRefund"
+                                @click="onOpenRefundModal(item)"
+                        >
+                            {{ $t('kommandhub-flutterwave-detail.grid.refund') }}
+                        </sw-context-menu-item>
+                        {% endblock %}
+                    </template>
+                </sw-data-grid>
                 {% endblock %}
 
-            </sw-container>
-            {% endblock %}
-
-            {% block kommandhub_flutterwave_detail_empty_state %}
-            <sw-empty-state
-                    v-else
-                    :title="$t('kommandhub-flutterwave-detail.emptyState.title')"
-                    :subline="$t('kommandhub-flutterwave-detail.emptyState.subline')"
-                    icon="regular-credit-card"
-                    class="kommandhub-flutterwave-detail-empty-state"
-            />
-            {% endblock %}
-        </template>
+                {% block kommandhub_flutterwave_detail_empty_state %}
+                <mt-empty-state
+                        v-else
+                        :headline="$t('kommandhub-flutterwave-detail.emptyState.title')"
+                        :description="$t('kommandhub-flutterwave-detail.emptyState.subline')"
+                        icon="regular-credit-card"
+                        centered
+                        class="kommandhub-flutterwave-detail-empty-state"
+                />
+                {% endblock %}
+                {% endblock %}
+            </template>
         {% endblock %}
     </mt-card>
+    {% endblock %}
+
+    {% block kommandhub_flutterwave_detail_captures_card %}
+    <mt-card
+            v-if="order && flutterwaveTransaction && captures.length"
+            position-identifier="kommandhub-flutterwave-detail-captures-card"
+            class="kommandhub-flutterwave-detail-captures-card"
+    >
+        <template #default>
+            {% block kommandhub_flutterwave_detail_captures_title %}
+            <h3 class="kommandhub-flutterwave-detail-captures-card__title">
+                {{ $t('kommandhub-flutterwave-detail.captures.title') }}
+            </h3>
+            {% endblock %}
+
+            {% block kommandhub_flutterwave_detail_captures_grid %}
+            <sw-data-grid
+                    :data-source="captures"
+                    :columns="flutterwaveCaptureColumns"
+                    :show-selection="false"
+                    :show-actions="true"
+                    class="kommandhub-flutterwave-detail-captures-grid"
+            >
+                <template #column-amount="{ item }">
+                    {% block kommandhub_flutterwave_detail_captures_grid_column_amount %}
+                    {{ currencyFilter(item.amount ? item.amount.totalPrice : 0, customFields.flutterwave_currency) }}
+                    {% endblock %}
+                </template>
+
+                <template #column-state="{ item }">
+                    {% block kommandhub_flutterwave_detail_captures_grid_column_state %}
+                    <sw-label v-if="item.state" variant="neutral" appearance="pill">
+                        {{ item.state }}
+                    </sw-label>
+                    <template v-else>–</template>
+                    {% endblock %}
+                </template>
+
+                <template #column-createdAt="{ item }">
+                    {% block kommandhub_flutterwave_detail_captures_grid_column_created_at %}
+                    <sw-time-ago
+                            v-if="item.createdAt"
+                            :date="item.createdAt"
+                            :date-time-format="{ month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }"
+                    />
+                    <template v-else>–</template>
+                    {% endblock %}
+                </template>
+
+                <template #actions="{ item }">
+                    {% block kommandhub_flutterwave_detail_captures_grid_actions %}
+                    <sw-context-menu-item
+                            v-if="item.refunds && item.refunds.length"
+                            @click="onOpenRefundsListModal(item)"
+                    >
+                        {{ $t('kommandhub-flutterwave-detail.captures.grid.refunds') }}
+                    </sw-context-menu-item>
+                    {% endblock %}
+                </template>
+            </sw-data-grid>
+            {% endblock %}
+        </template>
+    </mt-card>
+    {% endblock %}
+
+    {% block kommandhub_flutterwave_detail_refunds_list_modal %}
+    <sw-modal
+            v-if="order && showRefundsListModal"
+            :title="$t('kommandhub-flutterwave-detail.refunds.listModalTitle')"
+            @modal-close="onCloseRefundsListModal"
+    >
+        {% block kommandhub_flutterwave_detail_refunds_list_grid %}
+        <sw-data-grid
+                :data-source="flutterwaveRefunds"
+                :columns="flutterwaveRefundColumns"
+                :show-selection="false"
+                :show-actions="false"
+                class="kommandhub-flutterwave-detail-refunds-grid"
+        >
+            <template #column-amount="{ item }">
+                {% block kommandhub_flutterwave_detail_refunds_list_grid_column_amount %}
+                {{ currencyFilter(item.amount ? item.amount.totalPrice : 0, customFields.flutterwave_currency) }}
+                {% endblock %}
+            </template>
+
+            <template #column-state="{ item }">
+                {% block kommandhub_flutterwave_detail_refunds_list_grid_column_state %}
+                <sw-label v-if="item.state" variant="neutral" appearance="pill">
+                    {{ item.state }}
+                </sw-label>
+                <template v-else>–</template>
+                {% endblock %}
+            </template>
+
+            <template #column-externalReference="{ item }">
+                {% block kommandhub_flutterwave_detail_refunds_list_grid_column_external_reference %}
+                <template v-if="item.externalReference">{{ item.externalReference }}</template>
+                <template v-else>–</template>
+                {% endblock %}
+            </template>
+
+            <template #column-createdAt="{ item }">
+                {% block kommandhub_flutterwave_detail_refunds_list_grid_column_created_at %}
+                <sw-time-ago
+                        v-if="item.createdAt"
+                        :date="item.createdAt"
+                        :date-time-format="{ month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }"
+                />
+                <template v-else>–</template>
+                {% endblock %}
+            </template>
+        </sw-data-grid>
+        {% endblock %}
+
+        {% block kommandhub_flutterwave_detail_refunds_list_modal_footer %}
+        <template #modal-footer>
+            <mt-button
+                    variant="secondary"
+                    size="small"
+                    @click="onCloseRefundsListModal"
+            >
+                {{ $t('global.default.close') }}
+            </mt-button>
+        </template>
+        {% endblock %}
+    </sw-modal>
+    {% endblock %}
+
+    {% block kommandhub_flutterwave_detail_refund_modal %}
+    <sw-modal
+            v-if="order && showRefundModal"
+            :title="$t('kommandhub-flutterwave-detail.refund.modalTitle')"
+            @modal-close="onCloseRefundModal"
+    >
+        {% block kommandhub_flutterwave_detail_refund_modal_content %}
+        <sw-container columns="1fr 1fr" gap="16px">
+            {% block kommandhub_flutterwave_detail_refund_modal_amount_field %}
+            <mt-number-field
+                    v-model="refundAmount"
+                    :label="$t('kommandhub-flutterwave-detail.refund.amountLabel')"
+                    :placeholder="$t('kommandhub-flutterwave-detail.refund.amountPlaceholder')"
+                    :help-text="$t('kommandhub-flutterwave-detail.refund.amountHelpText')"
+                    number-type="float"
+                    :digits="refundAmountDigits"
+                    :min="minRefundableAmount"
+                    :max="Number(maxRefundableAmount)"
+            />
+            {% endblock %}
+
+            {% block kommandhub_flutterwave_detail_refund_modal_currency_field %}
+            <mt-text-field
+                    v-model="refundCurrency"
+                    :label="$t('kommandhub-flutterwave-detail.refund.currencyLabel')"
+                    disabled
+            />
+            {% endblock %}
+        </sw-container>
+
+        {% block kommandhub_flutterwave_detail_refund_modal_comments_field %}
+        <mt-text-field
+                v-model="comments"
+                :label="$t('kommandhub-flutterwave-detail.refund.commentsLabel')"
+                :placeholder="$t('kommandhub-flutterwave-detail.refund.commentsPlaceholder')"
+        />
+        {% endblock %}
+        {% endblock %}
+
+        {% block kommandhub_flutterwave_detail_refund_modal_footer %}
+        <template #modal-footer>
+            <mt-button
+                    variant="secondary"
+                    size="small"
+                    @click="onCloseRefundModal"
+            >
+                {{ $t('global.default.cancel') }}
+            </mt-button>
+
+            <sw-button-process
+                    variant="primary"
+                    size="small"
+                    :isLoading="isRefundLoading"
+                    :processSuccess="isRefundSuccess"
+                    @process-finish="onRefundFinished"
+                    @click="onConfirmRefund"
+            >
+                {{ $t('kommandhub-flutterwave-detail.refund.confirmButton') }}
+            </sw-button-process>
+        </template>
+        {% endblock %}
+    </sw-modal>
     {% endblock %}
 {% endblock %}

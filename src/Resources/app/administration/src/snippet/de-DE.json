@@ -1,15 +1,50 @@
 {
   "kommandhub-flutterwave-detail": {
     "title": "Flutterwave",
-    "summary": {
-      "chargedAmount": "Abgerechneter Betrag",
-      "paymentChannel": "Zahlungskanal"
-    },
+    "header": "Flutterwave-Transaktionsdetails",
     "grid": {
+      "chargedAmount": "Abgerechneter Betrag",
+      "settledAmount": "Ausgezahlter Betrag",
       "reference": "Flutterwave-Referenz",
       "transactionId": "Flutterwave-Transaktions-ID",
       "processingFee": "Bearbeitungsgebühr",
-      "verifiedAt": "Verifiziert am"
+      "channel": "Zahlungskanal",
+      "paymentMethod": "Zahlungsmethode",
+      "state": "Status",
+      "verifiedAt": "Verifiziert am",
+      "refund": "Erstatten"
+    },
+    "captures": {
+      "title": "Zahlungseinzüge",
+      "grid": {
+        "amount": "Betrag",
+        "state": "Status",
+        "createdAt": "Erstellt am",
+        "refunds": "Erstattungen anzeigen"
+      }
+    },
+    "refunds": {
+      "title": "Erstattungsverlauf",
+      "listModalTitle": "Erstattungsverlauf",
+      "grid": {
+        "amount": "Betrag",
+        "state": "Status",
+        "externalReference": "Flutterwave-Erstattungs-ID",
+        "createdAt": "Erstellt am"
+      }
+    },
+    "refund": {
+      "modalTitle": "Flutterwave-Zahlung erstatten",
+      "amountLabel": "Erstattungsbetrag",
+      "amountPlaceholder": "Erstattungsbetrag eingeben",
+      "amountHelpText": "Der zu erstattende Betrag in der Bestellwährung. Darf das erstattbare Guthaben nicht überschreiten.",
+      "currencyLabel": "Währung",
+      "commentsLabel": "Grund / Anmerkungen",
+      "commentsPlaceholder": "Optionale Anmerkung an Flutterwave",
+      "confirmButton": "Erstattung auslösen",
+      "success": "Die Erstattung wurde erfolgreich an Flutterwave übermittelt.",
+      "errorAmountTooLow": "Der Erstattungsbetrag muss mindestens {minAmount} betragen.",
+      "errorAmountTooHigh": "Der Erstattungsbetrag darf {maxAmount} nicht überschreiten."
     },
     "emptyState": {
       "title": "Keine Flutterwave-Transaktion gefunden",

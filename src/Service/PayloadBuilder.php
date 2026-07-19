@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Kommandhub\FlutterwaveV3SW\Service;
 
-use Kommandhub\Flutterwave\Payloads\CustomerPayload;
-use Kommandhub\Flutterwave\Payloads\CustomizationsPayload;
-use Kommandhub\Flutterwave\Payloads\PaymentPayload;
+use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\PaymentPayload;
+use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Checkout\Payment\Cart\PaymentTransactionStruct;
 
 /**
  * PayloadBuilder is responsible for constructing the payment payload for the Flutterwave API.
- * It maps Shopware's order and customer data to the format expected by the Flutterwave SDK.
+ * It maps Shopware's order and customer data to the format expected by Flutterwave V3.
  */
 class PayloadBuilder
 {
@@ -62,28 +61,19 @@ class PayloadBuilder
             throw new \RuntimeException('Return URL is missing for the payment transaction.');
         }
 
-        // 5. Create the customer payload.
-        $customerPayload = new CustomerPayload(
-            $orderCustomer->getEmail(),
-            null, // phonenumber is optional
-            sprintf('%s %s', $orderCustomer->getFirstName(), $orderCustomer->getLastName())
-        );
-
-        // 6. Create the customizations payload based on plugin settings.
-        $customizationsPayload = new CustomizationsPayload(
-            $this->settingService->getTitle($salesChannelId),
-            $this->settingService->getLogo($salesChannelId),
-            $this->settingService->getDescription($salesChannelId)
-        );
-
-        // 7. Assemble the final PaymentPayload.
+        // 5. Assemble the payload. The amount stays in major units: Flutterwave V3
+        //    charges the value it is given, so scaling it here would overcharge.
         return new PaymentPayload(
             $orderTransaction->getAmount()->getTotalPrice(),
             $currency->getIsoCode(),
             $orderTransaction->getId(),
             $returnUrl,
-            $customerPayload,
-            $customizationsPayload
+            $orderCustomer->getEmail(),
+            sprintf('%s %s', $orderCustomer->getFirstName(), $orderCustomer->getLastName()),
+            null, // phonenumber is optional
+            $this->settingService->getTitle($salesChannelId),
+            $this->settingService->getLogo($salesChannelId),
+            $this->settingService->getDescription($salesChannelId)
         );
     }
 }

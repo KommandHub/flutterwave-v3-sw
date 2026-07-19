@@ -4,140 +4,128 @@ declare(strict_types=1);
 
 namespace Kommandhub\FlutterwaveV3SW;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwaveTransactionHandler;
+use Kommandhub\FlutterwaveV3SW\Installer\CustomFieldsInstaller;
+use Kommandhub\FlutterwaveV3SW\Installer\PaymentMethodInstaller;
 use Shopware\Core\Checkout\Payment\PaymentMethodCollection;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\ActivateContext;
 use Shopware\Core\Framework\Plugin\Context\DeactivateContext;
 use Shopware\Core\Framework\Plugin\Context\InstallContext;
 use Shopware\Core\Framework\Plugin\Context\UninstallContext;
+use Shopware\Core\Framework\Plugin\Context\UpdateContext;
 use Shopware\Core\Framework\Plugin\Util\PluginIdProvider;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class KommandhubFlutterwaveV3SW extends Plugin
 {
+    /**
+     * This plugin's own runtime dependencies (composer.json `require`) are
+     * `shopware/core` and `shopware/storefront` — both guaranteed present in any
+     * Shopware installation already. There is nothing here for Shopware to
+     * `composer require`/`remove` on install or uninstall, so this returns
+     * false rather than true.
+     *
+     * Returning true (the previous value) made every install/activate/
+     * deactivate/uninstall shell out to Composer for no reason — needless work
+     * and risk in a real shop, and the direct cause of a reproducible dev-loop
+     * flake: Shopware's test bootstrapper force-reinstalls the plugin on every
+     * run, which ran `composer remove` for it, wiping its entry — and PSR-4
+     * mapping — from the root project's composer.json between test runs. That
+     * surfaced as "Class KommandhubFlutterwaveV3SW not found" on whichever run
+     * followed a reinstall, or, when the class had already been autoloaded from
+     * elsewhere in the same process, as this file silently reporting 0%
+     * coverage despite being fully exercised.
+     */
     public function executeComposerCommands(): bool
     {
-        return true;
+        return false;
     }
 
     public function install(InstallContext $installContext): void
     {
-        $this->addPaymentMethod($installContext->getContext());
+        $this->getPaymentMethodInstaller()->install(static::class, $installContext->getContext());
+        $this->installCustomFields($installContext->getContext());
+    }
+
+    public function update(UpdateContext $updateContext): void
+    {
+        parent::update($updateContext);
+
+        $this->getPaymentMethodInstaller()->install(static::class, $updateContext->getContext());
+        $this->installCustomFields($updateContext->getContext());
     }
 
     public function uninstall(UninstallContext $uninstallContext): void
     {
         parent::uninstall($uninstallContext);
 
-        // Only set the payment method to inactive when uninstalling. Removing the payment method would
-        // cause data consistency issues, since the payment method might have been used in several orders
-        $this->setPaymentMethodIsActive(false, $uninstallContext->getContext());
+        $this->getPaymentMethodInstaller()->deactivate($uninstallContext->getContext());
 
         if ($uninstallContext->keepUserData()) {
             return;
         }
 
-        // Remove or deactivate the data created by the plugin
+        // Drop the bank-profile custom fields when the merchant opts out of
+        // keeping plugin data. Customer records keep their values otherwise.
+        $this->getCustomFieldsInstaller()->uninstall($uninstallContext->getContext());
     }
 
     public function activate(ActivateContext $activateContext): void
     {
-        $this->setPaymentMethodIsActive(true, $activateContext->getContext());
+        $this->getPaymentMethodInstaller()->activate($activateContext->getContext());
         parent::activate($activateContext);
     }
 
     public function deactivate(DeactivateContext $deactivateContext): void
     {
-        $this->setPaymentMethodIsActive(false, $deactivateContext->getContext());
+        $this->getPaymentMethodInstaller()->deactivate($deactivateContext->getContext());
         parent::deactivate($deactivateContext);
     }
 
-    private function addPaymentMethod(Context $context): void
+    private function getPaymentMethodInstaller(): PaymentMethodInstaller
     {
-        try {
-            if ($this->container === null) {
-                return;
-            }
-        } catch (\Throwable) { // @phpstan-ignore-line
-            return;
-        }
+        // Plugin::$container is declared nullable, but every lifecycle hook that
+        // reaches here runs after Shopware has set it. Asserting keeps the
+        // failure loud (as the uninitialised-container tests expect) instead of
+        // inventing a silent no-op path that could never be exercised.
+        $container = $this->container;
+        \assert($container instanceof ContainerInterface);
 
-        $paymentMethodExists = $this->getPaymentMethodId();
-
-        // Payment method exists already, no need to continue here
-        if ($paymentMethodExists) {
-            return;
-        }
+        /** @var EntityRepository<PaymentMethodCollection> $paymentMethodRepo */
+        $paymentMethodRepo = $container->get('payment_method.repository');
 
         /** @var PluginIdProvider $pluginIdProvider */
-        $pluginIdProvider = $this->container->get(PluginIdProvider::class);
-        $pluginId = $pluginIdProvider->getPluginIdByBaseClass(get_class($this), $context);
+        $pluginIdProvider = $container->get(PluginIdProvider::class);
 
-        $paymentData = [
-            [
-                // payment handler will be selected by the identifier
-                'handlerIdentifier' => FlutterwaveTransactionHandler::class,
-                'name' => 'Flutterwave payment - Standard',
-                'description' => 'Pay securely using Flutterwave.',
-                'pluginId' => $pluginId,
-                'afterOrderEnabled' => true,
-                'technicalName' => 'kommandhub_flutterwave_standard',
-            ],
-        ];
-
-        /** @var EntityRepository<PaymentMethodCollection> $paymentRepository */
-        $paymentRepository = $this->container->get('payment_method.repository');
-        $paymentRepository->create($paymentData, $context);
+        return new PaymentMethodInstaller(
+            $paymentMethodRepo,
+            $pluginIdProvider
+        );
     }
 
-    private function setPaymentMethodIsActive(bool $active, Context $context): void
+    private function installCustomFields(Context $context): void
     {
-        try {
-            if ($this->container === null) {
-                return;
-            }
-        } catch (\Throwable) { // @phpstan-ignore-line
-            return;
-        }
-
-        /** @var EntityRepository<PaymentMethodCollection> $paymentRepository */
-        $paymentRepository = $this->container->get('payment_method.repository');
-
-        $paymentMethodId = $this->getPaymentMethodId();
-
-        // Payment does not even exist, so nothing to (de-)activate here
-        if (!$paymentMethodId) {
-            return;
-        }
-
-        $paymentMethod = [
-            'id' => $paymentMethodId,
-            'active' => $active,
-        ];
-
-        $paymentRepository->update([$paymentMethod], $context);
+        $installer = $this->getCustomFieldsInstaller();
+        $installer->install($context);
+        $installer->addRelations($context);
     }
 
-    private function getPaymentMethodId(): ?string
+    private function getCustomFieldsInstaller(): CustomFieldsInstaller
     {
-        try {
-            if ($this->container === null) {
-                return null;
-            }
-        } catch (\Throwable) { // @phpstan-ignore-line
-            return null;
-        }
+        $container = $this->container;
+        \assert($container instanceof ContainerInterface);
 
-        /** @var EntityRepository $paymentMethodRepository */
-        $paymentMethodRepository = $this->container->get('payment_method.repository');
+        /** @var EntityRepository $customFieldSetRepository */
+        $customFieldSetRepository = $container->get('custom_field_set.repository');
 
-        // Fetch ID for update
-        $paymentCriteria = (new Criteria())->addFilter(new EqualsFilter('handlerIdentifier', FlutterwaveTransactionHandler::class));
+        /** @var EntityRepository $customFieldSetRelationRepository */
+        $customFieldSetRelationRepository = $container->get('custom_field_set_relation.repository');
 
-        return $paymentMethodRepository->searchIds($paymentCriteria, Context::createDefaultContext())->firstId();
+        return new CustomFieldsInstaller(
+            $customFieldSetRepository,
+            $customFieldSetRelationRepository
+        );
     }
 }

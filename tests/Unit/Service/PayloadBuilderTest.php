@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Service;
 
-use Kommandhub\FlutterwaveV3SW\Service\Config;
 use Kommandhub\FlutterwaveV3SW\Service\PayloadBuilder;
+use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Price\Struct\CalculatedPrice;
 use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTaxCollection;
@@ -117,6 +117,33 @@ class PayloadBuilderTest extends TestCase
 
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Currency information is missing for the order.');
+
+        $this->payloadBuilder->build($orderTransaction, $paymentTransactionStruct);
+    }
+
+    /**
+     * Without a return URL the customer would be stranded on Flutterwave after
+     * paying, with no way back to have the order finalized — so this fails before
+     * the transaction is ever initialized rather than after money has moved.
+     */
+    public function testBuildThrowsExceptionWhenReturnUrlIsMissing(): void
+    {
+        $orderTransaction = new OrderTransactionEntity();
+        $order = new OrderEntity();
+        $order->setSalesChannelId('sales-channel-id');
+        $orderCustomer = new OrderCustomerEntity();
+        $orderCustomer->setEmail('customer@example.com');
+        $order->setOrderCustomer($orderCustomer);
+        $currency = new CurrencyEntity();
+        $currency->setIsoCode('NGN');
+        $order->setCurrency($currency);
+        $orderTransaction->setOrder($order);
+
+        $paymentTransactionStruct = $this->createMock(PaymentTransactionStruct::class);
+        $paymentTransactionStruct->method('getReturnUrl')->willReturn(null);
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Return URL is missing for the payment transaction.');
 
         $this->payloadBuilder->build($orderTransaction, $paymentTransactionStruct);
     }

@@ -1,0 +1,127 @@
+{% sw_extends '@Storefront/storefront/page/account/profile/index.html.twig' %}
+
+{% block page_account_profile_personal %}
+    {{ parent() }}
+
+    {% block page_account_profile_flutterwave_bank_visibility %}
+        {% if config('KommandhubFlutterwaveV3SW.config.collectBankData') %}
+            {% block page_account_profile_flutterwave_bank_card %}
+            <div class="card account-profile-bank mb-5">
+                <div class="card-body">
+                    {% block page_account_profile_flutterwave_bank_header %}
+                        <div class="card-title">
+                            {{ 'kommandhub-flutterwave.bank.title'|trans|sw_sanitize }}
+                        </div>
+                    {% endblock %}
+
+                    {% block page_account_profile_flutterwave_bank_form %}
+                        {% set customFields = context.customer.customFields %}
+
+                        {% block page_account_profile_flutterwave_bank_form_container %}
+                            {% set flutterwaveBankVerificationOptions = {
+                                banksUrl: path('frontend.flutterwave.bank.list'),
+                                verifyUrl: path('frontend.flutterwave.bank.verify'),
+                                initialBankCode: customFields.kommandhub_flutterwave_bank_code
+                            } %}
+
+                            <form id="profileBankForm"
+                                action="{{ path('frontend.flutterwave.bank.save') }}"
+                                method="post"
+                                data-form-handler="true"
+                                data-flutterwave-bank-verification="true"
+                                data-flutterwave-bank-verification-options="{{ flutterwaveBankVerificationOptions|default({})|json_encode|escape('html_attr') }}">
+
+                                {% block page_account_profile_flutterwave_bank_form_fields %}
+                                <div class="row g-3">
+                                    {% block page_account_profile_flutterwave_bank_form_bank_name %}
+                                        <div class="form-group col-12">
+                                            <label class="form-label" for="bankName">
+                                                {{ 'kommandhub-flutterwave.bank.bankNameLabel'|trans|sw_sanitize }}
+                                            </label>
+                                            <select class="form-select"
+                                                    id="bankName"
+                                                    name="bankName">
+                                                {% block page_account_profile_flutterwave_bank_form_bank_name_options %}
+                                                <option value="" disabled selected>
+                                                    {{ 'kommandhub-flutterwave.bank.bankNamePlaceholder'|trans|sw_sanitize }}
+                                                </option>
+                                                {% endblock %}
+                                            </select>
+                                        </div>
+                                    {% endblock %}
+
+                                    {% block page_account_profile_flutterwave_bank_form_bvn %}
+                                        {% if config('KommandhubFlutterwaveV3SW.config.showBvnField') %}
+                                            <div class="form-group col-12">
+                                                <label class="form-label" for="bvn">
+                                                    {{ 'kommandhub-flutterwave.bank.bvnLabel'|trans|sw_sanitize }}
+                                                </label>
+                                                <input type="text"
+                                                    class="form-control"
+                                                    id="bvn"
+                                                    name="bvn"
+                                                    inputmode="numeric"
+                                                    autocomplete="off"
+                                                    maxlength="11"
+                                                    value="{{ customFields.kommandhub_flutterwave_bvn }}"
+                                                    placeholder="{{ 'kommandhub-flutterwave.bank.bvnPlaceholder'|trans|sw_sanitize }}"
+                                                    {% if config('KommandhubFlutterwaveV3SW.config.requireBvn') %}required{% endif %}>
+                                                <div class="invalid-feedback"></div>
+                                                <div class="valid-feedback"></div>
+                                            </div>
+                                        {% endif %}
+                                    {% endblock %}
+
+                                    {% block page_account_profile_flutterwave_bank_form_account_number %}
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label" for="accountNumber">
+                                                {{ 'kommandhub-flutterwave.bank.accountNumberLabel'|trans|sw_sanitize }}
+                                            </label>
+                                            <input type="text"
+                                                class="form-control"
+                                                id="accountNumber"
+                                                name="accountNumber"
+                                                inputmode="numeric"
+                                                maxlength="10"
+                                                value="{{ customFields.kommandhub_flutterwave_account_number }}"
+                                                placeholder="{{ 'kommandhub-flutterwave.bank.accountNumberPlaceholder'|trans|sw_sanitize }}"
+                                                required>
+                                            <div class="invalid-feedback"></div>
+                                            <div class="valid-feedback"></div>
+                                        </div>
+                                    {% endblock %}
+
+                                    {% block page_account_profile_flutterwave_bank_form_account_name %}
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label" for="accountName">
+                                                {{ 'kommandhub-flutterwave.bank.accountNameLabel'|trans|sw_sanitize }}
+                                            </label>
+                                            <input type="text"
+                                                class="form-control"
+                                                id="accountName"
+                                                name="accountName"
+                                                value="{{ customFields.kommandhub_flutterwave_account_name }}"
+                                                placeholder="{{ 'kommandhub-flutterwave.bank.accountNamePlaceholder'|trans|sw_sanitize }}"
+                                                readonly>
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                                {% endblock %}
+
+                                {% block page_account_profile_flutterwave_bank_form_actions %}
+                                    <div class="form-actions mt-3">
+                                        <button type="submit"
+                                                class="btn btn-light btn-sm">
+                                            {{ 'kommandhub-flutterwave.bank.saveButton'|trans|sw_sanitize }}
+                                        </button>
+                                    </div>
+                                {% endblock %}
+                            </form>
+                        {% endblock %}
+                    {% endblock %}
+                </div>
+            </div>
+            {% endblock %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}
