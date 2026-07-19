@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Installer;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Installer;
 
-use Kommandhub\FlutterwaveV3SW\Installer\PaymentMethodInstaller;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwavePaymentHandler;
+use Kommandhub\FlutterwaveSW\Installer\PaymentMethodInstaller;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\FlutterwavePaymentHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Framework\Context;

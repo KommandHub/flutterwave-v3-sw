@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Payment\Service;
 
 use Doctrine\DBAL\Connection;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundAggregationResult;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundAggregator;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundProcessor;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundAggregationResult;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundAggregator;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundProcessor;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionStateHandler;

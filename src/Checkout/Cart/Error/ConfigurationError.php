@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Cart\Error;
+namespace Kommandhub\FlutterwaveSW\Checkout\Cart\Error;
 
 use Shopware\Core\Checkout\Cart\Error\Error;
 

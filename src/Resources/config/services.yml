@@ -13,29 +13,29 @@ services:
     # logger and each other's debug toggle. A bind is scoped to the services
     # defined in this file, so it cannot collide.
     bind:
-      Psr\Log\LoggerInterface $logger: '@Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger'
+      Psr\Log\LoggerInterface $logger: '@Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger'
 
-  Kommandhub\FlutterwaveV3SW\:
+  Kommandhub\FlutterwaveSW\:
     resource: '../../*'
     exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
   # Symfony does not auto-alias an interface to its single implementation.
-  Kommandhub\FlutterwaveV3SW\Client\Http\HttpClientInterface:
-    alias: Kommandhub\FlutterwaveV3SW\Client\Http\FlutterwaveHttpClient
+  Kommandhub\FlutterwaveSW\Client\Http\HttpClientInterface:
+    alias: Kommandhub\FlutterwaveSW\Client\Http\FlutterwaveHttpClient
 
-  Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FlutterwaveRefundLedgerInterface:
-    alias: Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FlutterwaveRefundLedger
+  Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FlutterwaveRefundLedgerInterface:
+    alias: Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FlutterwaveRefundLedger
 
   # The explicit $logger argument overrides the bind above, so the wrapper
   # decorates the real monolog channel instead of recursing into itself.
-  Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger:
+  Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger:
     arguments:
       $logger: '@monolog.logger.flutterwave_channel'
     tags:
       - { name: 'monolog.logger', channel: 'flutterwave_channel' }
 
   # AbstractController needs the container to resolve its base-class helpers.
-  Kommandhub\FlutterwaveV3SW\Administration\Controller\RefundController:
+  Kommandhub\FlutterwaveSW\Administration\Controller\RefundController:
     public: true
     calls:
       - [setContainer, ['@service_container']]

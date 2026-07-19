@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Event;
+namespace Kommandhub\FlutterwaveSW\Webhook\Event;
 
 /**
  * `refund.completed` — fires when a refund settles or fails.

@@ -1,5 +1,5 @@
 {
-    "name": "kommandhub/flutterwave-v3-sw",
+    "name": "kommandhub/flutterwave-sw",
     "description": "Professional Shopware 6 integration for Flutterwave: accept secure payments via cards, bank transfers, and mobile money. Expand your reach across Africa with this reliable checkout solution.",
     "type": "shopware-platform-plugin",
     "version": "0.9.0-beta.1",
@@ -21,7 +21,7 @@
         "nigeria",
         "ecommerce"
     ],
-    "homepage": "https://github.com/KommandHub/flutterwave-v3-sw",
+    "homepage": "https://github.com/KommandHub/flutterwave-sw",
     "authors": [
         {
             "name": "Kommandhub Limited",
@@ -32,9 +32,9 @@
     ],
     "support": {
         "email": "info@kommandhub.com",
-        "issues": "https://github.com/KommandHub/flutterwave-v3-sw/issues",
-        "source": "https://github.com/KommandHub/flutterwave-v3-sw",
-        "docs": "https://github.com/KommandHub/flutterwave-v3-sw/blob/main/README.md"
+        "issues": "https://github.com/KommandHub/flutterwave-sw/issues",
+        "source": "https://github.com/KommandHub/flutterwave-sw",
+        "docs": "https://github.com/KommandHub/flutterwave-sw/blob/main/README.md"
     },
     "require": {
         "php": ">=8.2",
@@ -50,16 +50,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Kommandhub\\FlutterwaveV3SW\\": "src/"
+            "Kommandhub\\FlutterwaveSW\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kommandhub\\FlutterwaveV3SW\\Tests\\": "tests/"
+            "Kommandhub\\FlutterwaveSW\\Tests\\": "tests/"
         }
     },
     "extra": {
-        "shopware-plugin-class": "Kommandhub\\FlutterwaveV3SW\\KommandhubFlutterwaveV3SW",
+        "shopware-plugin-class": "Kommandhub\\FlutterwaveSW\\KommandhubFlutterwaveSW",
         "label": {
             "de-DE": "Flutterwave-Zahlung von Kommandhub",
             "en-GB": "Flutterwave Payment by Kommandhub",

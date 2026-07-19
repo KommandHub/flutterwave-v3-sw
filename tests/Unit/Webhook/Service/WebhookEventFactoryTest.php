@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Webhook\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Webhook\Service;
 
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\ChargeCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\RefundCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookEventFactory;
+use Kommandhub\FlutterwaveSW\Webhook\Event\ChargeCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Event\RefundCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookEventFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\UsesClass;

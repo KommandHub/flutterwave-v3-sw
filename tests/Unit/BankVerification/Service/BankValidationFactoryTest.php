@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\BankVerification\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\BankVerification\Service;
 
-use Kommandhub\FlutterwaveV3SW\BankVerification\Service\BankValidationFactory;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\BankVerification\Service\BankValidationFactory;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;

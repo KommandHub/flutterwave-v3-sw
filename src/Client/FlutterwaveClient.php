@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Client;
+namespace Kommandhub\FlutterwaveSW\Client;
 
-use Kommandhub\FlutterwaveV3SW\Client\Http\HttpClientInterface;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Bank;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Bvn;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Refund;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Subaccount;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Transaction;
+use Kommandhub\FlutterwaveSW\Client\Http\HttpClientInterface;
+use Kommandhub\FlutterwaveSW\Client\Resource\Bank;
+use Kommandhub\FlutterwaveSW\Client\Resource\Bvn;
+use Kommandhub\FlutterwaveSW\Client\Resource\Refund;
+use Kommandhub\FlutterwaveSW\Client\Resource\Subaccount;
+use Kommandhub\FlutterwaveSW\Client\Resource\Transaction;
 
 /**
  * Class FlutterwaveClient.

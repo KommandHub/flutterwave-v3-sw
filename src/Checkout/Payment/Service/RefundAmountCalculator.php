@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\RefundContext;
-use Kommandhub\FlutterwaveV3SW\Exception\RefundValidationException;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveCurrencyHelper;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Struct\RefundContext;
+use Kommandhub\FlutterwaveSW\Exception\RefundValidationException;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveCurrencyHelper;
 
 /**
  * Validates a requested refund amount against a transaction's refundable

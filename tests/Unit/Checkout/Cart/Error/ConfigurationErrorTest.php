@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Cart\Error;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Cart\Error;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Cart\Error\ConfigurationError;
+use Kommandhub\FlutterwaveSW\Checkout\Cart\Error\ConfigurationError;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Error\Error;
 

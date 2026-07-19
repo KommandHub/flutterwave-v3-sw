@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Payment\Struct;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Payment\Struct;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct\RefundContext;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Struct\RefundContext;
 use PHPUnit\Framework\TestCase;
 
 class RefundContextTest extends TestCase

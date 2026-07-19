@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Payment\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Payment\Service;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FlutterwaveRefundLedger;
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Transaction;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveCurrencyHelper;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\FlutterwaveRefundLedger;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Client\Resource\Transaction;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveCurrencyHelper;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;

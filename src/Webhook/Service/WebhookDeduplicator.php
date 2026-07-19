@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Service;
+namespace Kommandhub\FlutterwaveSW\Webhook\Service;
 
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransaction\OrderTransactionEntity;
 use Shopware\Core\Framework\Context;
 

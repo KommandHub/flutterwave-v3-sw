@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Setting\Service;
+namespace Kommandhub\FlutterwaveSW\Setting\Service;
 
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 
 class Config
 {
-    public const KEY = 'KommandhubFlutterwaveV3SW.config.';
+    public const KEY = 'KommandhubFlutterwaveSW.config.';
 
     public function __construct(private readonly SystemConfigService $systemConfigService)
     {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Event;
+namespace Kommandhub\FlutterwaveSW\Webhook\Event;
 
 use Shopware\Core\Framework\Context;
 use Symfony\Contracts\EventDispatcher\Event;

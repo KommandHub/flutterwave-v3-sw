@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Payment;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Payment;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\AbstractPaymentHandler;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\AbstractPaymentHandler;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Payment\Cart\PaymentHandler\PaymentHandlerType;
 use Shopware\Core\Framework\Context;

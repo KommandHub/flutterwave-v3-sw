@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Cart\Validation;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Checkout\Cart\Validation;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Cart\Error\ConfigurationError;
-use Kommandhub\FlutterwaveV3SW\Checkout\Cart\Validation\TransactionCartValidator;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwavePaymentHandler;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Checkout\Cart\Error\ConfigurationError;
+use Kommandhub\FlutterwaveSW\Checkout\Cart\Validation\TransactionCartValidator;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\FlutterwavePaymentHandler;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Cart;

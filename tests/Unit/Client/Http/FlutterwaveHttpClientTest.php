@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Client\Http;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Client\Http;
 
-use Kommandhub\FlutterwaveV3SW\Client\Http\FlutterwaveHttpClient;
-use Kommandhub\FlutterwaveV3SW\Exception\FlutterwaveException;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Client\Http\FlutterwaveHttpClient;
+use Kommandhub\FlutterwaveSW\Exception\FlutterwaveException;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;

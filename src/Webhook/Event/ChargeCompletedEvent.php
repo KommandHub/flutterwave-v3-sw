@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Event;
+namespace Kommandhub\FlutterwaveSW\Webhook\Event;
 
 /**
  * `charge.completed` — fires for both successful and failed payments, so the

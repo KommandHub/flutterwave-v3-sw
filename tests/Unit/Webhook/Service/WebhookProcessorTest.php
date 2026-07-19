@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Webhook\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Webhook\Service;
 
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\ChargeCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookEventFactory;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookProcessor;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookSignatureValidator;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Webhook\Event\ChargeCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookEventFactory;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookProcessor;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookSignatureValidator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\UsesClass;

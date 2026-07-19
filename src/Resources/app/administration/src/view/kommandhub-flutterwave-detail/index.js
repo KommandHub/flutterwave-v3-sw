@@ -216,11 +216,11 @@ Shopware.Component.register('kommandhub-flutterwave-detail', {
         },
 
         refundEnabled() {
-            return this.config['KommandhubFlutterwaveV3SW.config.refundEnabled'] !== false;
+            return this.config['KommandhubFlutterwaveSW.config.refundEnabled'] !== false;
         },
 
         configuredMinRefund() {
-            const value = Number(this.config['KommandhubFlutterwaveV3SW.config.minimumRefundAmount']);
+            const value = Number(this.config['KommandhubFlutterwaveSW.config.minimumRefundAmount']);
 
             return Number.isFinite(value) && value > 0 ? value : 0;
         },
@@ -279,7 +279,7 @@ Shopware.Component.register('kommandhub-flutterwave-detail', {
     methods: {
         async loadConfig(salesChannelId) {
             this.config = await this.systemConfigApiService.getValues(
-                'KommandhubFlutterwaveV3SW.config',
+                'KommandhubFlutterwaveSW.config',
                 salesChannelId
             );
         },

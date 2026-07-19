@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\BankVerification\Controller;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\BankVerification\Controller;
 
-use Kommandhub\FlutterwaveV3SW\BankVerification\Controller\BankVerificationController;
-use Kommandhub\FlutterwaveV3SW\BankVerification\Service\BankValidationFactory;
-use Kommandhub\FlutterwaveV3SW\Client\FlutterwaveClient;
-use Kommandhub\FlutterwaveV3SW\Client\Resource\Bank;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\BankVerification\Controller\BankVerificationController;
+use Kommandhub\FlutterwaveSW\BankVerification\Service\BankValidationFactory;
+use Kommandhub\FlutterwaveSW\Client\FlutterwaveClient;
+use Kommandhub\FlutterwaveSW\Client\Resource\Bank;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;

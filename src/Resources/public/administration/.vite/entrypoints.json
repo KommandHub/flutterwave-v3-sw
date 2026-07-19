@@ -1,13 +1,13 @@
 {
-  "base": "/bundles/kommandhubflutterwavev3sw/administration/",
+  "base": "/bundles/kommandhubflutterwavesw/administration/",
   "entryPoints": {
-    "kommandhub-flutterwave-v3-s-w": {
+    "kommandhub-flutterwave-s-w": {
       "css": [
-        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-D72_ykDM.css"
+        "/bundles/kommandhubflutterwavesw/administration/assets/kommandhub-flutterwave-s-w-D72_ykDM.css"
       ],
       "dynamic": [],
       "js": [
-        "/bundles/kommandhubflutterwavev3sw/administration/assets/kommandhub-flutterwave-v3-s-w-i7uujBXf.js"
+        "/bundles/kommandhubflutterwavesw/administration/assets/kommandhub-flutterwave-s-w-CF28VyuC.js"
       ],
       "legacy": false,
       "preload": []

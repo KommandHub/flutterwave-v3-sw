@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Webhook\Service;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Webhook\Service;
 
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
-use Kommandhub\FlutterwaveV3SW\Util\FlutterwaveConstants;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookDeduplicator;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Util\FlutterwaveConstants;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookDeduplicator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

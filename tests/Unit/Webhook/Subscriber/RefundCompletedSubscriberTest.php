@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Webhook\Subscriber;
+namespace Kommandhub\FlutterwaveSW\Tests\Unit\Webhook\Subscriber;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundProcessor;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\RefundCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookDeduplicator;
-use Kommandhub\FlutterwaveV3SW\Webhook\Subscriber\RefundCompletedSubscriber;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundProcessor;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Webhook\Event\RefundCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookDeduplicator;
+use Kommandhub\FlutterwaveSW\Webhook\Subscriber\RefundCompletedSubscriber;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\UsesClass;

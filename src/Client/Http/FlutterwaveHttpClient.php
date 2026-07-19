@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Client\Http;
+namespace Kommandhub\FlutterwaveSW\Client\Http;
 
-use Kommandhub\FlutterwaveV3SW\Exception\FlutterwaveException;
-use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use Kommandhub\FlutterwaveSW\Exception\FlutterwaveException;
+use Kommandhub\FlutterwaveSW\Setting\Service\Config;
 use Symfony\Contracts\HttpClient\HttpClientInterface as SymfonyHttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 

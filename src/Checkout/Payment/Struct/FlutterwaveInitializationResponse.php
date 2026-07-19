@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Checkout\Payment\Struct;
+namespace Kommandhub\FlutterwaveSW\Checkout\Payment\Struct;
 
 use Shopware\Core\Framework\Struct\Struct;
 

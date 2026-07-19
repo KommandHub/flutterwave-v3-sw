@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Webhook\Subscriber;
+namespace Kommandhub\FlutterwaveSW\Webhook\Subscriber;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\RefundProcessor;
-use Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger;
-use Kommandhub\FlutterwaveV3SW\Service\OrderTransactionService;
-use Kommandhub\FlutterwaveV3SW\Webhook\Event\RefundCompletedEvent;
-use Kommandhub\FlutterwaveV3SW\Webhook\Service\WebhookDeduplicator;
+use Kommandhub\FlutterwaveSW\Checkout\Payment\Service\RefundProcessor;
+use Kommandhub\FlutterwaveSW\Logging\ConfigurableLogger;
+use Kommandhub\FlutterwaveSW\Service\OrderTransactionService;
+use Kommandhub\FlutterwaveSW\Webhook\Event\RefundCompletedEvent;
+use Kommandhub\FlutterwaveSW\Webhook\Service\WebhookDeduplicator;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransactionCaptureRefund\OrderTransactionCaptureRefundStateHandler;
 use Shopware\Core\Checkout\Order\Aggregate\OrderTransactionCaptureRefund\OrderTransactionCaptureRefundStates;
 use Shopware\Core\Checkout\Payment\Cart\RefundPaymentTransactionStruct;

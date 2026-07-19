@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kommandhub\FlutterwaveV3SW\Client\Resource;
+namespace Kommandhub\FlutterwaveSW\Client\Resource;
 
-use Kommandhub\FlutterwaveV3SW\Exception\FlutterwaveException;
+use Kommandhub\FlutterwaveSW\Exception\FlutterwaveException;
 
 /**
  * Class Refund.
