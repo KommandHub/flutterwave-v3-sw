@@ -5,6 +5,13 @@ parameters:
     # Set the level to 9 (the highest level)
     level: 9
 
+    # A version-conditional ignore (the PaymentMethodBlockedError 6.8
+    # deprecation, suppressed inline in TransactionCartValidator) matches under
+    # the Shopware version shopware-cli analyses but not under the version this
+    # config runs against. Don't fail the run over an ignore that is unmatched
+    # only because of that version difference.
+    reportUnmatchedIgnoredErrors: false
+
     ignoreErrors:
         - identifier: missingType.iterableValue
         - identifier: missingType.generics

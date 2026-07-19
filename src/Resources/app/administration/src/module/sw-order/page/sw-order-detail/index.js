@@ -1,8 +1,6 @@
 import template from './sw-order-detail.html.twig';
 import { FLUTTERWAVE_HANDLER_IDENTIFIER, FLUTTERWAVE_REFERENCE_FIELD, isAbortError } from '../../../../util/flutterwave';
 
-const { Criteria } = Shopware.Data;
-
 Shopware.Component.override('sw-order-detail', {
     template,
 
