@@ -1,0 +1,18 @@
+{
+  "kommandhub-flutterwave": {
+    "bank": {
+      "title": "Bankverbindung",
+      "bankNameLabel": "Name der Bank",
+      "bankNamePlaceholder": "Bank auswählen",
+      "accountNumberLabel": "Kontonummer",
+      "accountNumberPlaceholder": "Geben Sie Ihre 10-stellige Kontonummer ein",
+      "accountNameLabel": "Kontoinhaber",
+      "accountNamePlaceholder": "Der Kontoinhaber wird automatisch ausgefüllt",
+      "bvnLabel": "BVN (Bank Verification Number)",
+      "bvnPlaceholder": "Geben Sie Ihre 11-stellige BVN ein",
+      "saveButton": "Bankverbindung speichern",
+      "saveSuccess": "Bankverbindung erfolgreich gespeichert.",
+      "saveError": "Bitte korrigieren Sie die folgenden Fehler:"
+    }
+  }
+}

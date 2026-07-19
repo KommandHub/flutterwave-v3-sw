@@ -3,13 +3,39 @@ services:
     autowire: true
     autoconfigure: true
     public: false
+    # Give this plugin's services the ConfigurableLogger wherever they type-hint
+    # PSR-3, without touching the container-wide Psr\Log\LoggerInterface alias.
+    #
+    # Aliasing that globally rebinds LoggerInterface for *every* autowired
+    # consumer in the installation, including Shopware core and other plugins.
+    # Two plugins doing it means the last one compiled wins, so sibling plugins
+    # (this one and KommandhubPaystackSW) would silently log through each other's
+    # logger and each other's debug toggle. A bind is scoped to the services
+    # defined in this file, so it cannot collide.
+    bind:
+      Psr\Log\LoggerInterface $logger: '@Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger'
 
   Kommandhub\FlutterwaveV3SW\:
     resource: '../../*'
     exclude: '../../{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-  Kommandhub\FlutterwaveV3SW\Checkout\Payment\:
-    resource: '../../Checkout/Payment/*'
-    public: true
+  # Symfony does not auto-alias an interface to its single implementation.
+  Kommandhub\FlutterwaveV3SW\Client\Http\HttpClientInterface:
+    alias: Kommandhub\FlutterwaveV3SW\Client\Http\FlutterwaveHttpClient
+
+  Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FlutterwaveRefundLedgerInterface:
+    alias: Kommandhub\FlutterwaveV3SW\Checkout\Payment\Service\FlutterwaveRefundLedger
+
+  # The explicit $logger argument overrides the bind above, so the wrapper
+  # decorates the real monolog channel instead of recursing into itself.
+  Kommandhub\FlutterwaveV3SW\Logging\ConfigurableLogger:
+    arguments:
+      $logger: '@monolog.logger.flutterwave_channel'
     tags:
-      - { name: 'shopware.payment_handler' }
+      - { name: 'monolog.logger', channel: 'flutterwave_channel' }
+
+  # AbstractController needs the container to resolve its base-class helpers.
+  Kommandhub\FlutterwaveV3SW\Administration\Controller\RefundController:
+    public: true
+    calls:
+      - [setContainer, ['@service_container']]

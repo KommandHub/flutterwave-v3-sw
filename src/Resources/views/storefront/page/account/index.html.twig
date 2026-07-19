@@ -1,0 +1,6 @@
+{% sw_extends '@Storefront/storefront/page/account/index.html.twig' %}
+
+{% block page_account_overview_addresses_include %}
+    {{ parent() }}
+    {% sw_include '@KommandhubFlutterwaveV3SW/storefront/page/account/bank.html.twig' %}
+{% endblock %}

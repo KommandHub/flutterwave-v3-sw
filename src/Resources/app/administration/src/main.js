@@ -6,15 +6,23 @@ Shopware.Locale.extend('fr-FR', frFR);
 Shopware.Locale.extend('de-DE', deDE);
 Shopware.Locale.extend('en-GB', enGB);
 
-import './module/sw-order/page/sw-order-detail'
-import './view/kommandhub-flutterwave-detail'
+import FlutterwaveRefundService from './service/flutterwave-refund.service';
+
+Shopware.Service().register('flutterwaveRefundService', (container) => {
+    const initContainer = Shopware.Application.getContainer('init');
+    return new FlutterwaveRefundService(initContainer.httpClient, container.loginService);
+});
+
+import './acl';
+import './module/sw-order/page/sw-order-detail';
+import './view/kommandhub-flutterwave-detail';
 
 Shopware.Module.register('kommandhub-flutterwave-detail', {
     routeMiddleware(next, currentRoute) {
         if (currentRoute.name === 'sw.order.detail') {
             const flutterwaveRoute = 'kommandhub.flutterwave.detail';
 
-            if (currentRoute.name === 'sw.order.detail' && !currentRoute.children.some(child => child.name === flutterwaveRoute)) {
+            if (!currentRoute.children.some((child) => child.name === flutterwaveRoute)) {
                 currentRoute.children.push({
                     name: flutterwaveRoute,
                     path: 'kommandhub/flutterwave',
@@ -25,12 +33,12 @@ Shopware.Module.register('kommandhub-flutterwave-detail', {
                     },
                     props: {
                         default: ($route) => {
-                            return { orderId: $route.params.id.toLowerCase() };
+                            return { orderId: $route.params.id };
                         },
                     },
                 });
             }
         }
         next(currentRoute);
-    }
+    },
 });

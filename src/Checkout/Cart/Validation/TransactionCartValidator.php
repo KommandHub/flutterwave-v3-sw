@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Kommandhub\FlutterwaveV3SW\Checkout\Cart\Validation;
 
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwaveTransactionHandler;
+use Kommandhub\FlutterwaveV3SW\Checkout\Cart\Error\ConfigurationError;
+use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwavePaymentHandler;
+use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
 use Shopware\Core\Checkout\Cart\Cart;
 use Shopware\Core\Checkout\Cart\CartValidatorInterface;
 use Shopware\Core\Checkout\Cart\Error\ErrorCollection;
@@ -23,18 +25,27 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('shopware.cart.validator')]
 class TransactionCartValidator implements CartValidatorInterface
 {
+    public function __construct(private readonly Config $config)
+    {
+    }
+
     public function validate(Cart $cart, ErrorCollection $errors, SalesChannelContext $context): void
     {
-        // Check if the selected payment method is not the FlutterwaveTransactionHandler; if so, skip validation.
-        if ($context->getPaymentMethod()->getHandlerIdentifier() !== FlutterwaveTransactionHandler::class) {
+        // Check if the selected payment method is not the FlutterwavePaymentHandler; if so, skip validation.
+        if ($context->getPaymentMethod()->getHandlerIdentifier() !== FlutterwavePaymentHandler::class) {
             return;
+        }
+
+        if (empty($this->config->getSecretKey($context->getSalesChannelId()))) {
+            $errors->add(new ConfigurationError());
         }
 
         // If the cart value is zero, add a PaymentMethodBlockedError to prevent using this payment method.
         if ($this->isZeroValueCart($cart)) {
+            $paymentMethod = $context->getPaymentMethod();
             /** @var string $name */
-            $name = $context->getPaymentMethod()->getTranslation('name') ?? '';
-            $errors->add(new PaymentMethodBlockedError($name));
+            $name = $paymentMethod->getTranslation('name') ?? '';
+            $errors->add(new PaymentMethodBlockedError($name, 'Zero value cart', $paymentMethod->getId()));
         }
     }
 

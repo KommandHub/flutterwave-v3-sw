@@ -1,0 +1,18 @@
+{
+  "kommandhub-flutterwave": {
+    "bank": {
+      "title": "Bank Account Details",
+      "bankNameLabel": "Bank Name",
+      "bankNamePlaceholder": "Select your bank",
+      "accountNumberLabel": "Account Number",
+      "accountNumberPlaceholder": "Enter your 10-digit account number",
+      "accountNameLabel": "Account Name",
+      "accountNamePlaceholder": "Account name will be populated automatically",
+      "bvnLabel": "BVN (Bank Verification Number)",
+      "bvnPlaceholder": "Enter your 11-digit BVN",
+      "saveButton": "Save Bank Details",
+      "saveSuccess": "Bank details saved successfully.",
+      "saveError": "Please correct the following errors:"
+    }
+  }
+}

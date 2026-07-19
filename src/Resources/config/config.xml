@@ -24,10 +24,12 @@
         </input-field>
 
         <input-field type="password">
-            <name>apiEncryptionKey</name>
-            <label>Encryption Key</label>
+            <name>secretHash</name>
+            <label>Webhook Secret Hash</label>
             <helpText>
-                Your Flutterwave encryption key. Used for additional security when processing payments.
+                The secret hash you set under Settings &gt; Webhooks in your Flutterwave dashboard. It is a value
+                you choose yourself, not one of your API keys, and it must match the dashboard exactly.
+                Webhooks are rejected until this is set.
             </helpText>
             <copyable>true</copyable>
         </input-field>
@@ -63,10 +65,11 @@
         </input-field>
 
         <input-field type="password">
-            <name>apiEncryptionKeySandbox</name>
-            <label>Encryption Key</label>
+            <name>secretHashSandbox</name>
+            <label>Webhook Secret Hash</label>
             <helpText>
-                Your Flutterwave encryption key. Used for additional security when processing payments.
+                The secret hash for your Flutterwave test environment. Flutterwave lets you set a different hash
+                for test and live, so this is kept separate from the live one.
             </helpText>
             <copyable>true</copyable>
         </input-field>
@@ -78,7 +81,7 @@
         <input-field type="text">
             <name>title</name>
             <label>Title</label>
-            <defaultValue>Flutterwave Standard Payment</defaultValue>
+            <defaultValue>Pay with Flutterwave</defaultValue>
             <helpText>
                 The payment method title that customers will see during checkout.
             </helpText>
@@ -192,12 +195,224 @@
             </helpText>
         </input-field>
 
+    </card>
+
+    <card>
+        <title>Refunds</title>
+        <title lang="de-DE">Erstattungen</title>
+        <title lang="fr-FR">Remboursements</title>
+
         <input-field type="bool">
-            <name>enableDebugging</name>
-            <label>Enable error logging</label>
+            <name>refundEnabled</name>
+            <label>Enable Refunds</label>
+            <label lang="de-DE">Erstattungen aktivieren</label>
+            <label lang="fr-FR">Activer les remboursements</label>
+            <defaultValue>true</defaultValue>
+            <helpText>
+                Allow administrators to issue Flutterwave refunds from the order detail page.
+            </helpText>
+            <helpText lang="de-DE">
+                Erlaubt Administratoren, Flutterwave-Erstattungen auf der Bestelldetailseite auszulösen.
+            </helpText>
+            <helpText lang="fr-FR">
+                Permet aux administrateurs d'émettre des remboursements Flutterwave depuis la page de détail de la commande.
+            </helpText>
+        </input-field>
+
+        <input-field type="float">
+            <name>minimumRefundAmount</name>
+            <label>Minimum Refund Amount</label>
+            <label lang="de-DE">Mindesterstattungsbetrag</label>
+            <label lang="fr-FR">Montant minimum de remboursement</label>
+            <helpText>
+                The smallest refund allowed, in the order currency's major units (e.g. 100 for ₦100).
+                Leave empty to use Flutterwave's per-currency minimum.
+            </helpText>
+            <helpText lang="de-DE">
+                Der kleinste zulässige Erstattungsbetrag in der Hauptwährungseinheit der Bestellung (z. B. 100 für ₦100).
+                Leer lassen, um das währungsspezifische Minimum von Flutterwave zu verwenden.
+            </helpText>
+            <helpText lang="fr-FR">
+                Le plus petit remboursement autorisé, dans l'unité principale de la devise de la commande (par ex. 100 pour ₦100).
+                Laissez vide pour utiliser le minimum par devise de Flutterwave.
+            </helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Bank Data Collection</title>
+        <title lang="de-DE">Bankdatenerfassung</title>
+        <title lang="fr-FR">Collecte des données bancaires</title>
+
+        <input-field type="bool">
+            <name>collectBankData</name>
+            <label>Enable Bank Data Collection</label>
+            <label lang="de-DE">Bankdatenerfassung aktivieren</label>
+            <label lang="fr-FR">Activer la collecte des données bancaires</label>
             <defaultValue>false</defaultValue>
             <helpText>
-                Enable detailed error logging for debugging purposes. Disable in production environments.
+                Show a bank-account form in the customer account area. Account numbers are verified against
+                Flutterwave before they are saved.
+            </helpText>
+            <helpText lang="de-DE">
+                Zeigt im Kundenkonto ein Formular für Bankverbindungen an. Kontonummern werden vor dem Speichern
+                über Flutterwave geprüft.
+            </helpText>
+            <helpText lang="fr-FR">
+                Affiche un formulaire de compte bancaire dans l'espace client. Les numéros de compte sont vérifiés
+                auprès de Flutterwave avant d'être enregistrés.
+            </helpText>
+        </input-field>
+
+        <input-field type="text">
+            <name>bankCountry</name>
+            <label>Bank Country (ISO code)</label>
+            <label lang="de-DE">Bankland (ISO-Code)</label>
+            <label lang="fr-FR">Pays de la banque (code ISO)</label>
+            <defaultValue>NG</defaultValue>
+            <helpText>
+                ISO 3166-1 alpha-2 country whose bank list is offered (e.g. NG, GH, KE, UG, ZA, TZ).
+            </helpText>
+            <helpText lang="de-DE">
+                ISO-3166-1-alpha-2-Land, dessen Bankliste angeboten wird (z. B. NG, GH, KE, UG, ZA, TZ).
+            </helpText>
+            <helpText lang="fr-FR">
+                Pays ISO 3166-1 alpha-2 dont la liste des banques est proposée (par ex. NG, GH, KE, UG, ZA, TZ).
+            </helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>showBvnField</name>
+            <label>Show BVN Field</label>
+            <label lang="de-DE">BVN-Feld anzeigen</label>
+            <label lang="fr-FR">Afficher le champ BVN</label>
+            <defaultValue>false</defaultValue>
+            <helpText>
+                Show the BVN (Bank Verification Number) field. Requires Flutterwave BVN approval before resolved
+                verification can be enabled; without it, the BVN is validated for format and stored only.
+            </helpText>
+            <helpText lang="de-DE">
+                Zeigt das BVN-Feld (Bank Verification Number) an. Erfordert eine Flutterwave-BVN-Freigabe, bevor die
+                aufgelöste Verifizierung aktiviert werden kann; ohne diese wird die BVN nur auf Format geprüft und gespeichert.
+            </helpText>
+            <helpText lang="fr-FR">
+                Affiche le champ BVN (numéro de vérification bancaire). Nécessite l'approbation BVN de Flutterwave avant
+                d'activer la vérification résolue ; sans elle, le BVN est seulement validé et stocké.
+            </helpText>
+        </input-field>
+
+        <input-field type="bool">
+            <name>requireBvn</name>
+            <label>Require BVN</label>
+            <label lang="de-DE">BVN erforderlich</label>
+            <label lang="fr-FR">BVN obligatoire</label>
+            <defaultValue>false</defaultValue>
+            <helpText>
+                If enabled, the BVN field is mandatory when the bank form is submitted.
+            </helpText>
+            <helpText lang="de-DE">
+                Wenn aktiviert, ist das BVN-Feld beim Absenden des Bankformulars obligatorisch.
+            </helpText>
+            <helpText lang="fr-FR">
+                Si activé, le champ BVN est obligatoire lors de l'envoi du formulaire bancaire.
+            </helpText>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Debugging</title>
+        <title lang="de-DE">Fehlerdiagnose</title>
+        <title lang="fr-FR">Débogage</title>
+
+        <input-field type="bool">
+            <name>enableDebugging</name>
+            <label>Enable Detailed Logging</label>
+            <label lang="de-DE">Detaillierte Protokollierung aktivieren</label>
+            <label lang="fr-FR">Activer la journalisation détaillée</label>
+            <defaultValue>false</defaultValue>
+            <helpText>
+                Logs detailed information about payment events to help diagnose issues. Should be disabled in
+                production to avoid exposing sensitive data. Errors are always recorded, whether this is enabled or not.
+            </helpText>
+            <helpText lang="de-DE">
+                Protokolliert detaillierte Informationen zu Zahlungsereignissen zur Fehlerdiagnose. Im Produktivbetrieb
+                deaktivieren, um sensible Daten zu schützen. Fehler werden unabhängig von dieser Einstellung immer protokolliert.
+            </helpText>
+            <helpText lang="fr-FR">
+                Enregistre des informations détaillées sur les événements de paiement pour faciliter le diagnostic.
+                À désactiver en production afin de ne pas exposer de données sensibles. Les erreurs sont toujours
+                enregistrées, que cette option soit activée ou non.
+            </helpText>
+        </input-field>
+
+        <input-field type="multi-select">
+            <name>logLevels</name>
+            <options>
+                <option>
+                    <id>debug</id>
+                    <name>Debug</name>
+                    <name lang="de-DE">Debug</name>
+                    <name lang="fr-FR">Débogage</name>
+                </option>
+                <option>
+                    <id>info</id>
+                    <name>Info</name>
+                    <name lang="de-DE">Info</name>
+                    <name lang="fr-FR">Info</name>
+                </option>
+                <option>
+                    <id>notice</id>
+                    <name>Notice</name>
+                    <name lang="de-DE">Hinweis</name>
+                    <name lang="fr-FR">Remarque</name>
+                </option>
+                <option>
+                    <id>warning</id>
+                    <name>Warning</name>
+                    <name lang="de-DE">Warnung</name>
+                    <name lang="fr-FR">Avertissement</name>
+                </option>
+                <option>
+                    <id>error</id>
+                    <name>Error</name>
+                    <name lang="de-DE">Fehler</name>
+                    <name lang="fr-FR">Erreur</name>
+                </option>
+                <option>
+                    <id>critical</id>
+                    <name>Critical</name>
+                    <name lang="de-DE">Kritisch</name>
+                    <name lang="fr-FR">Critique</name>
+                </option>
+                <option>
+                    <id>alert</id>
+                    <name>Alert</name>
+                    <name lang="de-DE">Alarm</name>
+                    <name lang="fr-FR">Alerte</name>
+                </option>
+                <option>
+                    <id>emergency</id>
+                    <name>Emergency</name>
+                    <name lang="de-DE">Notfall</name>
+                    <name lang="fr-FR">Urgence</name>
+                </option>
+            </options>
+            <label>Log levels to log</label>
+            <label lang="de-DE">Zu protokollierende Log-Level</label>
+            <label lang="fr-FR">Niveaux de journalisation à enregistrer</label>
+            <helpText>
+                Select which log levels should be recorded when detailed logging is enabled. Leave empty to record all
+                of them. Error and above are always recorded regardless of this selection.
+            </helpText>
+            <helpText lang="de-DE">
+                Wählen Sie aus, welche Log-Level aufgezeichnet werden sollen, wenn die detaillierte Protokollierung
+                aktiviert ist. Leer lassen, um alle aufzuzeichnen. Fehler und höher werden unabhängig von dieser
+                Auswahl immer aufgezeichnet.
+            </helpText>
+            <helpText lang="fr-FR">
+                Sélectionnez les niveaux à enregistrer lorsque la journalisation détaillée est activée. Laissez vide
+                pour tous les enregistrer. Les erreurs et niveaux supérieurs sont toujours enregistrés, quelle que
+                soit cette sélection.
             </helpText>
         </input-field>
     </card>

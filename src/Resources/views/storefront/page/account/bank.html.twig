@@ -1,0 +1,68 @@
+{% block page_account_overview_flutterwave_bank_details %}
+    {% block page_account_overview_flutterwave_bank_details_visibility %}
+        {% if config('KommandhubFlutterwaveV3SW.config.collectBankData') %}
+            {% block page_account_overview_flutterwave_bank_details_wrapper %}
+            <div class="row js-account-overview-bank_details">
+                {% block page_account_overview_flutterwave_bank_details_inner %}
+                    {% block page_account_overview_flutterwave_bank_details_column %}
+                    <div class="col-lg-6 card-col account-overview-card overview-bank-details">
+                        {% block page_account_overview_flutterwave_bank_details_card %}
+                            <div class="card">
+                                <div class="card-body">
+                                    {% block page_account_overview_flutterwave_bank_details_title %}
+                                        <h2 class="card-title">
+                                            {{ 'kommandhub-flutterwave.bank.title'|trans|sw_sanitize }}
+                                        </h2>
+                                    {% endblock %}
+
+                                    {% block page_account_overview_flutterwave_bank_details_content %}
+                                        {% set customFields = context.customer.customFields %}
+                                        <div class="bank-details-content">
+                                            {% block page_account_overview_flutterwave_bank_details_bank_name %}
+                                            <p>
+                                                <strong>{{ 'kommandhub-flutterwave.bank.bankNameLabel'|trans|sw_sanitize }}:</strong><br>
+                                                {{ customFields.kommandhub_flutterwave_bank_name|default('–') }}
+                                            </p>
+                                            {% endblock %}
+
+                                            {% block page_account_overview_flutterwave_bank_details_account_number %}
+                                            <p>
+                                                <strong>{{ 'kommandhub-flutterwave.bank.accountNumberLabel'|trans|sw_sanitize }}:</strong><br>
+                                                {{ customFields.kommandhub_flutterwave_account_number|default('–') }}
+                                            </p>
+                                            {% endblock %}
+
+                                            {% block page_account_overview_flutterwave_bank_details_account_name %}
+                                            <p>
+                                                <strong>{{ 'kommandhub-flutterwave.bank.accountNameLabel'|trans|sw_sanitize }}:</strong><br>
+                                                {{ customFields.kommandhub_flutterwave_account_name|default('–') }}
+                                            </p>
+                                            {% endblock %}
+
+                                            {% block page_account_overview_flutterwave_bank_details_bvn %}
+                                                {% if config('KommandhubFlutterwaveV3SW.config.showBvnField') %}
+                                                    {% set bvn = customFields.kommandhub_flutterwave_bvn %}
+                                                    <p>
+                                                        <strong>{{ 'kommandhub-flutterwave.bank.bvnLabel'|trans|sw_sanitize }}:</strong><br>
+                                                        {#  BVN is sensitive: show only the last 4 digits at rest. #}
+                                                        {% if bvn %}
+                                                            {{ ('•••••••' ~ bvn[-4:])|sw_sanitize }}
+                                                        {% else %}
+                                                            –
+                                                        {% endif %}
+                                                    </p>
+                                                {% endif %}
+                                            {% endblock %}
+                                        </div>
+                                    {% endblock %}
+                                </div>
+                            </div>
+                        {% endblock %}
+                    </div>
+                    {% endblock %}
+                {% endblock %}
+            </div>
+            {% endblock %}
+        {% endif %}
+    {% endblock %}
+{% endblock %}

@@ -13,7 +13,21 @@ class AbstractPaymentHandlerTest extends TestCase
 {
     public function testSupportsReturnsFalse(): void
     {
-        $handler = new class() extends AbstractPaymentHandler {
+        $handler = $this->getHandler();
+
+        $this->assertFalse($handler->supports(PaymentHandlerType::RECURRING, 'method-id', Context::createDefaultContext()));
+    }
+
+    public function testSupportsReturnsTrueForRefund(): void
+    {
+        $handler = $this->getHandler();
+
+        $this->assertTrue($handler->supports(PaymentHandlerType::REFUND, 'method-id', Context::createDefaultContext()));
+    }
+
+    private function getHandler(): AbstractPaymentHandler
+    {
+        return new class() extends AbstractPaymentHandler {
             public function pay(\Symfony\Component\HttpFoundation\Request $request, \Shopware\Core\Checkout\Payment\Cart\PaymentTransactionStruct $transaction, Context $context, ?\Shopware\Core\Framework\Struct\Struct $validateStruct): ?\Symfony\Component\HttpFoundation\RedirectResponse
             {
                 return null;
@@ -22,7 +36,5 @@ class AbstractPaymentHandlerTest extends TestCase
             {
             }
         };
-
-        $this->assertFalse($handler->supports(PaymentHandlerType::RECURRING, 'method-id', Context::createDefaultContext()));
     }
 }

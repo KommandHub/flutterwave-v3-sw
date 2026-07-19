@@ -1,84 +1,30 @@
 .kommandhub-flutterwave-detail-card {
-    &__icon {
-        height: 120px;
-        width: auto;
-        display: block;
-        margin-bottom: 16px;
-    }
-
-    .kommandhub-flutterwave-detail-header {
+    &__banner {
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 16px;
+        padding: 24px;
         background-color: #fff;
-        padding: 24px;
-        border-radius: 8px;
-        border: 1px solid #d1d9e0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid #d1d9e0;
     }
 
-    .kommandhub-flutterwave-detail-content {
-        padding: 24px;
-        background-color: #f9fafb;
+    &__icon {
+        height: 60px;
+        width: auto;
+        display: block;
     }
 
-    .kommandhub-flutterwave-detail-summary {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        padding-top: 16px;
-        border-top: 1px solid #f1f4f9;
-
-        &__item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-
-            &--right {
-                align-items: flex-end;
-                text-align: right;
-            }
-        }
-
-        &__label {
-            font-size: 12px;
-            color: #52667a;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-        }
-
-        &__value {
-            font-size: 18px;
-            font-weight: 700;
-            color: #011b33;
-        }
+    &__header {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #011b33;
+        text-align: center;
     }
 
     .kommandhub-flutterwave-detail-grid {
-        padding: 0 8px;
-    }
-
-    .kommandhub-flutterwave-detail-actions {
-        display: flex;
-        justify-content: flex-end;
-        padding-top: 16px;
-        border-top: 1px solid #d1d9e0;
-    }
-
-    .kommandhub-flutterwave-detail-list {
-        dt {
-            color: #52667a;
-            font-size: 13px;
-            margin-bottom: 4px;
-        }
-
-        dd {
-            color: #011b33;
-            font-weight: 500;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
+        padding: 0;
     }
 
     .kommandhub-flutterwave-detail-empty-state {
@@ -88,8 +34,16 @@
         flex-direction: column;
         justify-content: center;
 
-        .sw-empty-state__icon {
+        .mt-empty-state__icon {
             color: #011b33;
         }
+    }
+}
+
+.kommandhub-flutterwave-detail-captures-card {
+    margin-top: 20px;
+
+    &__title {
+        margin-bottom: 10px;
     }
 }

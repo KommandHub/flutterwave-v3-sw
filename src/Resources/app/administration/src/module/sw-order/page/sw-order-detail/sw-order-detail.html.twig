@@ -1,13 +1,20 @@
 {% block sw_order_detail_content_tabs_extension %}
     {% block sw_order_detail_content_tabs_flutterwave %}
+        {% block sw_order_detail_content_tabs_flutterwave_item %}
         <sw-tabs-item
+                v-if="!isLoading && isFlutterwavePayment"
                 class="sw-order-detail__tabs-tab-flutterwave"
                 :route="{ name: 'kommandhub.flutterwave.detail', params: { id: $route.params.id } }"
                 :title="$t('sw-order.detail.tabFlutterwave')"
         >
+            {% block sw_order_detail_content_tabs_flutterwave_label %}
             {{ $t('sw-order.detail.tabFlutterwave') }}
+            {% endblock %}
         </sw-tabs-item>
+        {% endblock %}
     {% endblock %}
 
+    {% block sw_order_detail_content_tabs_flutterwave_parent %}
     {% parent %}
+    {% endblock %}
 {% endblock %}

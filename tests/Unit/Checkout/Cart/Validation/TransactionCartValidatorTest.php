@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Kommandhub\FlutterwaveV3SW\Tests\Unit\Checkout\Cart\Validation;
 
+use Kommandhub\FlutterwaveV3SW\Checkout\Cart\Error\ConfigurationError;
 use Kommandhub\FlutterwaveV3SW\Checkout\Cart\Validation\TransactionCartValidator;
-use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwaveTransactionHandler;
+use Kommandhub\FlutterwaveV3SW\Checkout\Payment\FlutterwavePaymentHandler;
+use Kommandhub\FlutterwaveV3SW\Setting\Service\Config;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Shopware\Core\Checkout\Cart\Cart;
 use Shopware\Core\Checkout\Cart\Error\ErrorCollection;
@@ -22,9 +25,12 @@ class TransactionCartValidatorTest extends TestCase
 {
     private TransactionCartValidator $validator;
 
+    private Config&MockObject $config;
+
     protected function setUp(): void
     {
-        $this->validator = new TransactionCartValidator();
+        $this->config = $this->createMock(Config::class);
+        $this->validator = new TransactionCartValidator($this->config);
     }
 
     public function testValidateSkipsIfDifferentPaymentMethod(): void
@@ -43,6 +49,8 @@ class TransactionCartValidatorTest extends TestCase
 
     public function testValidateBlocksZeroValueCart(): void
     {
+        $this->config->method('getSecretKey')->willReturn('test-secret-key');
+
         $cart = new Cart('test');
         $cart->setLineItems(new LineItemCollection([new LineItem('id', 'type')]));
         $cart->setPrice(new CartPrice(0, 0, 0, new CalculatedTaxCollection(), new TaxRuleCollection(), CartPrice::TAX_STATE_GROSS));
@@ -50,7 +58,7 @@ class TransactionCartValidatorTest extends TestCase
         $errors = new ErrorCollection();
         $context = $this->createMock(SalesChannelContext::class);
         $paymentMethod = $this->createMock(PaymentMethodEntity::class);
-        $paymentMethod->method('getHandlerIdentifier')->willReturn(FlutterwaveTransactionHandler::class);
+        $paymentMethod->method('getHandlerIdentifier')->willReturn(FlutterwavePaymentHandler::class);
         $paymentMethod->method('getTranslation')->with('name')->willReturn('Flutterwave');
 
         $context->method('getPaymentMethod')->willReturn($paymentMethod);
@@ -63,6 +71,8 @@ class TransactionCartValidatorTest extends TestCase
 
     public function testValidateDoesNotBlockNonZeroValueCart(): void
     {
+        $this->config->method('getSecretKey')->willReturn('test-secret-key');
+
         $cart = new Cart('test');
         $cart->setLineItems(new LineItemCollection([new LineItem('id', 'type')]));
         $cart->setPrice(new CartPrice(10, 10, 10, new CalculatedTaxCollection(), new TaxRuleCollection(), CartPrice::TAX_STATE_GROSS));
@@ -70,13 +80,34 @@ class TransactionCartValidatorTest extends TestCase
         $errors = new ErrorCollection();
         $context = $this->createMock(SalesChannelContext::class);
         $paymentMethod = new PaymentMethodEntity();
-        $paymentMethod->setHandlerIdentifier(FlutterwaveTransactionHandler::class);
+        $paymentMethod->setHandlerIdentifier(FlutterwavePaymentHandler::class);
 
         $context->method('getPaymentMethod')->willReturn($paymentMethod);
 
         $this->validator->validate($cart, $errors, $context);
 
         $this->assertCount(0, $errors);
+    }
+
+    public function testValidateBlocksIfConfigurationMissing(): void
+    {
+        $this->config->method('getSecretKey')->willReturn('');
+
+        $cart = new Cart('test');
+        $cart->setLineItems(new LineItemCollection([new LineItem('id', 'type')]));
+        $cart->setPrice(new CartPrice(10, 10, 10, new CalculatedTaxCollection(), new TaxRuleCollection(), CartPrice::TAX_STATE_GROSS));
+
+        $errors = new ErrorCollection();
+        $context = $this->createMock(SalesChannelContext::class);
+        $paymentMethod = $this->createMock(PaymentMethodEntity::class);
+        $paymentMethod->method('getHandlerIdentifier')->willReturn(FlutterwavePaymentHandler::class);
+
+        $context->method('getPaymentMethod')->willReturn($paymentMethod);
+
+        $this->validator->validate($cart, $errors, $context);
+
+        $this->assertCount(1, $errors);
+        $this->assertInstanceOf(ConfigurationError::class, $errors->first());
     }
 
     public function testIsZeroValueCartWithEmptyCart(): void

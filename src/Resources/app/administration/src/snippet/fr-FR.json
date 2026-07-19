@@ -1,15 +1,50 @@
 {
   "kommandhub-flutterwave-detail": {
     "title": "Flutterwave",
-    "summary": {
-      "chargedAmount": "Montant débité",
-      "paymentChannel": "Canal de paiement"
-    },
+    "header": "Détails de la transaction Flutterwave",
     "grid": {
+      "chargedAmount": "Montant débité",
+      "settledAmount": "Montant versé",
       "reference": "Référence Flutterwave",
       "transactionId": "ID de transaction Flutterwave",
       "processingFee": "Frais de traitement",
-      "verifiedAt": "Vérifié à"
+      "channel": "Canal de paiement",
+      "paymentMethod": "Mode de paiement",
+      "state": "État",
+      "verifiedAt": "Vérifié à",
+      "refund": "Rembourser"
+    },
+    "captures": {
+      "title": "Encaissements",
+      "grid": {
+        "amount": "Montant",
+        "state": "État",
+        "createdAt": "Créé à",
+        "refunds": "Voir les remboursements"
+      }
+    },
+    "refunds": {
+      "title": "Historique des remboursements",
+      "listModalTitle": "Historique des remboursements",
+      "grid": {
+        "amount": "Montant",
+        "state": "État",
+        "externalReference": "ID de remboursement Flutterwave",
+        "createdAt": "Créé à"
+      }
+    },
+    "refund": {
+      "modalTitle": "Rembourser le paiement Flutterwave",
+      "amountLabel": "Montant du remboursement",
+      "amountPlaceholder": "Saisir le montant du remboursement",
+      "amountHelpText": "Le montant à rembourser, dans la devise de la commande. Ne peut pas dépasser le solde remboursable.",
+      "currencyLabel": "Devise",
+      "commentsLabel": "Raison / Commentaires",
+      "commentsPlaceholder": "Note facultative envoyée à Flutterwave",
+      "confirmButton": "Émettre le remboursement",
+      "success": "Le remboursement a été soumis à Flutterwave avec succès.",
+      "errorAmountTooLow": "Le montant du remboursement doit être d'au moins {minAmount}.",
+      "errorAmountTooHigh": "Le montant du remboursement ne peut pas dépasser {maxAmount}."
     },
     "emptyState": {
       "title": "Aucune transaction Flutterwave trouvée",

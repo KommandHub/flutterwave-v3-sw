@@ -21,6 +21,10 @@ abstract class AbstractPaymentHandler extends ShopwareAbstractPaymentHandler
      */
     public function supports(PaymentHandlerType $type, string $paymentMethodId, Context $context): bool
     {
+        if ($type === PaymentHandlerType::REFUND) {
+            return true;
+        }
+
         return false;
     }
 }
